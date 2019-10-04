@@ -1,4 +1,4 @@
-# [(Project Name TBD)](https://immense-ridge-78589.herokuapp.com/)
+# [(Email Lesson Manager)](https://immense-ridge-78589.herokuapp.com/)
 
 ## Overview
 
