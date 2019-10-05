@@ -1,6 +1,7 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
+var http = require("http"); // For scheduled Heroku server waker
 
 var db = require("./models");
 
@@ -32,6 +33,11 @@ var syncOptions = { force: false };
 if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
+
+// Scheduled Heroku server waker
+setInterval(function () {
+  http.get("https://immense-ridge-78589.herokuapp.com/");
+}, 1200000);
 
 
 //------------//
