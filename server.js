@@ -68,9 +68,9 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Scheduled Heroku server waker
-// setInterval(function () {
-//   http.get("https://immense-ridge-78589.herokuapp.com/");
-// }, 1200000);
+setInterval(function () {
+  http.get("https://immense-ridge-78589.herokuapp.com/");
+}, 1200000);
 
 
 //------------//
