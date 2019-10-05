@@ -1,4 +1,4 @@
-const passport = require('passport');
+var passport = require('passport');
 require('./strategies/local.strategy');
 // STORE USER IN THE SESSION
 // passport.serializeUser();

@@ -1,8 +1,8 @@
 var db = require("../models");
 var express = require("express");
-const passport = require('passport');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+var passport = require('passport');
+var bcrypt = require('bcryptjs');
+var saltRounds = 10;
 
 
 module.exports = function(app) {
@@ -48,8 +48,8 @@ module.exports = function(app) {
         console.log("You have an account with Us Please login")
 
         }else{
-          const email = req.body.email;
-          const password = req.body.password
+          var email = req.body.email;
+          var password = req.body.password
 
           //SIGN UP USER
          bcrypt.hash(password, saltRounds, function(err, hash) {
@@ -58,14 +58,14 @@ module.exports = function(app) {
               email: email,
               password: hash
 
+
             }).then(function(result){
              
              
-              const user_id = result.id;
+              var user_id = result.id;
               console.log("Success Sign up")
-              console.log(user_id)
               req.login(user_id, function(err){
-              res.redirect('/');
+              res.redirect('/api/session');
               })
             
             })
@@ -104,10 +104,8 @@ module.exports = function(app) {
 
                   }else{
                  
-                    const user_id = result[0].id;
+                    var user_id = result[0].id;
               console.log("Success Login")
-              console.log(user_id)
-   
               req.login(user_id, function(err){
               res.send(true);
               

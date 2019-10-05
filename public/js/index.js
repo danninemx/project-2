@@ -6,6 +6,29 @@ var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 var $sendButton = $("#send");
 
+
+$.ajax({
+  url: "/api/session",
+  type: "GET",
+}).then(function(checkSession){
+  
+  try{
+   if(checkSession.user_id){
+     $("#login").html('LogOut');
+   }else{
+    $("#login").html('Login');
+   }
+   
+
+  }catch(err){
+    console.log(err)
+  }
+  
+  
+})
+
+
+
 $("#toggleLogin").click(function(event) {
   event.preventDefault();
   if ($("#loginActive").val() == "1") {
@@ -51,8 +74,7 @@ var saveUser = function(event){
       data: JSON.stringify(saveUserObjet)
     }).then(function(result){
       if (result) {
-        console.log(result)
-        window.location.replace("/")
+       window.location.replace("/")
       }else{
         window.location.replace("/login")
       }

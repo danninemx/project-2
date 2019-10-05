@@ -1,25 +1,18 @@
+# # language: node_js
+# # node_js: "8"
+# # branches:
+# #   only:
+# #   - master
+# # cache:
+# #   directories:
+# #     - node_modules
+# # before_install:
+# #   - mysql -e 'CREATE DATABASE testdb;'
+
 # language: node_js
-# node_js: "8"
-# branches:
-#   only:
-#   - master
-# cache:
-#   directories:
-#     - node_modules
-# before_install:
-#   - mysql -e 'CREATE DATABASE testdb;'
-
-language: node_js
-node_js:
-<<<<<<< HEAD
-  - "6"
-
-script:
-  - npm run lint
-=======
-  - "11"
-​
-script:
-  - npm run test
-  - npm run lint
->>>>>>> 96e9c87bd7a82cb66fbc0ca8cd6e43a4c6c26604
+# node_js:
+#   - "11"
+# ​
+# script:
+#   - npm run test
+#   - npm run lint

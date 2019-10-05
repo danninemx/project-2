@@ -4,14 +4,24 @@ require("passport");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    console.log(req.user);
-    console.log(req.isAuthenticated());
-    db.Example.findAll({}).then(function(dbExamples) {
+  
+   db.Example.findAll({}).then(function(dbExamples) {
       res.render("index", {
         msg: "Welcome!",
         examples: dbExamples
       });
     });
+  });
+//SESSION ROUTE
+  app.get("/api/session", function(req, res) {
+    
+    var session = {
+      user_id: req.user,
+      ifSession: req.isAuthenticated()
+
+    }
+    
+   res.json(session);
   });
 
   app.get("/login", function(req, res) {
