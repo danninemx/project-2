@@ -109,7 +109,8 @@ module.exports = function(app) {
               console.log(user_id)
    
               req.login(user_id, function(err){
-              res.redirect('/');
+              res.send(true);
+              
               })
                   }
               });

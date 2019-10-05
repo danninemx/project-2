@@ -50,6 +50,12 @@ var saveUser = function(event){
       type: "POST",
       data: JSON.stringify(saveUserObjet)
     }).then(function(result){
+      if (result) {
+        console.log(result)
+        window.location.replace("/")
+      }else{
+        window.location.replace("/login")
+      }
       
     })
   
