@@ -1,6 +1,12 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
+const cookieparser = require('cookie-parser');
+const xsession = require('express-session');
+const passport = require('passport');
+const MySQLStore = require('express-mysql-session')(xsession);
+
+
 
 var db = require("./models");
 
@@ -10,7 +16,31 @@ var PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieparser());
 app.use(express.static("public"));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+var options = {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+ 
+
+};
+var sessionStore = new MySQLStore(options);
+app.use(xsession({
+  secret: 'jsjdsjndsndsjdnsjdnsdjsw',
+  resave: false,
+  store: sessionStore,
+  saveUninitialized: false
+  // cookie: { secure: true }
+}))
+
 
 // Handlebars
 app.engine(
@@ -22,6 +52,7 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
+require('./config/passport')(app);
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
