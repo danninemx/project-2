@@ -4,12 +4,11 @@ var exphbs = require("express-handlebars");
 
 var http = require("http"); // For scheduled Heroku server waker
 
-// Passport setup
+// For Account Manager
 const cookieparser = require('cookie-parser');
 const xsession = require('express-session');
 const passport = require('passport');
 const MySQLStore = require('express-mysql-session')(xsession);
-
 
 
 var db = require("./models");
