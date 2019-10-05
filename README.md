@@ -1,4 +1,4 @@
-# [(Email Lesson Manager)](https://immense-ridge-78589.herokuapp.com/)
+# [Email Lesson Manager](https://immense-ridge-78589.herokuapp.com/)
 
 ## Overview
 
@@ -24,18 +24,22 @@ The link on the email guides the users to the website where they can learn more 
 
 ## Components
 
-### Front End
-
-- [Handlebars.js](http://handlebarsjs.com/)
-
-### Back End
-
 - [Node.js](https://nodejs.org/en/)
 - [NPM: Express](https://www.npmjs.com/package/express)
+- [NPM: Express Handlebars](https://www.npmjs.com/package/express-handlebars)
+- [NPM: MySQL 2](https://www.npmjs.com/package/mysql2)
+- [NPM: Node Cron](https://www.npmjs.com/package/node-cron)
+- [NPM: Node-Sass](https://www.npmjs.com/package/node-sass)
 - [NPM: Nodemailer](https://www.npmjs.com/package/nodemailer)
+- [NPM: Sequelize](https://www.npmjs.com/package/sequelize)
 - [Heroku](https://heroku.com)
+- [Heroku Add-on: JawsDB MySQL](https://elements.heroku.com/addons/jawsdb)
 
-### API
+---
 
-- [Scraper API](https://www.scraperapi.com/)
-- [Avatar Generator API](https://avatar-gen.herokuapp.com/)
+## Developers (alphabetical)
+
+- [Bladimir Orellana](https://github.com/BladimirOrellana)
+- [Danny Kim](https://github.com/danninemx)
+- [John Paschal](https://github.com/patrickjpaschal)
+- [Martin Palacios](https://github.com/martinapalacios)
