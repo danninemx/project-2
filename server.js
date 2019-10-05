@@ -1,11 +1,14 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
+
+var http = require("http"); // For scheduled Heroku server waker
+
+// For Account Manager
 const cookieparser = require('cookie-parser');
 const xsession = require('express-session');
 const passport = require('passport');
 const MySQLStore = require('express-mysql-session')(xsession);
-
 
 
 var db = require("./models");
@@ -29,7 +32,7 @@ var options = {
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
- 
+
 
 };
 var sessionStore = new MySQLStore(options);
@@ -63,6 +66,11 @@ var syncOptions = { force: false };
 if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
+
+// Scheduled Heroku server waker
+setInterval(function () {
+  http.get("https://immense-ridge-78589.herokuapp.com/");
+}, 1200000);
 
 
 //------------//

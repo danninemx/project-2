@@ -11,7 +11,15 @@
 
 language: node_js
 node_js:
+<<<<<<< HEAD
   - "6"
 
 script:
   - npm run lint
+=======
+  - "11"
+​
+script:
+  - npm run test
+  - npm run lint
+>>>>>>> 96e9c87bd7a82cb66fbc0ca8cd6e43a4c6c26604
