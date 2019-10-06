@@ -2,9 +2,14 @@ var db = require("../models");
 require("passport");
 
 module.exports = function(app) {
+  app.use(function(req,res,next){
+    res.locals.isAuthenticated = req.isAuthenticated()
+    console.log(res.locals.isAuthenticated)
+    next()
+  })
   // Load index page
   app.get("/", function(req, res) {
-  
+    
    db.Example.findAll({}).then(function(dbExamples) {
       res.render("index", {
         msg: "Welcome!",
@@ -25,11 +30,12 @@ module.exports = function(app) {
   });
 
   app.get("/login", function(req, res) {
+    
     res.render("login");
   });
   //Profile
 
-  app.get("/profile", function(req, res) {
+  app.get("/profile", authenticationMiddleware(), function(req, res) {
     res.render("profile", {
       msg: "Welcomen Alex!"
     });
@@ -50,3 +56,11 @@ module.exports = function(app) {
     res.render("404");
   });
 };
+function authenticationMiddleware () {  
+	return (req, res, next) => {
+		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+
+	    if (req.isAuthenticated()) return next();
+	    res.redirect('/login')
+	}
+}

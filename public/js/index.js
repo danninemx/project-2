@@ -11,12 +11,16 @@ $.ajax({
   url: "/api/session",
   type: "GET",
 }).then(function(checkSession){
-  
+  console.log(checkSession.user_id)
+  console.log(checkSession.ifSession)
   try{
    if(checkSession.user_id){
-     $("#login").html('LogOut');
+     
+  
+  
+
    }else{
-    $("#login").html('Login');
+   
    }
    
 
@@ -73,6 +77,7 @@ var saveUser = function(event){
       type: "POST",
       data: JSON.stringify(saveUserObjet)
     }).then(function(result){
+      console.log(result)
       if (result) {
        window.location.replace("/")
       }else{

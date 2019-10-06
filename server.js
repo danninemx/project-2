@@ -2,6 +2,7 @@ require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
 
+
 var http = require("http"); // For scheduled Heroku server waker
 
 // For Account Manager
@@ -9,7 +10,7 @@ const cookieparser = require('cookie-parser');
 const xsession = require('express-session');
 const passport = require('passport');
 const MySQLStore = require('express-mysql-session')(xsession);
-
+var LocalStrategy = require('passport-local').Strategy;
 
 var db = require("./models");
 
@@ -43,6 +44,10 @@ app.use(xsession({
   saveUninitialized: false
   // cookie: { secure: true }
 }))
+
+
+
+
 
 
 // Handlebars
