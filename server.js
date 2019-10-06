@@ -1,8 +1,6 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
-
-
 var http = require("http"); // For scheduled Heroku server waker
 
 // For Account Manager
@@ -11,9 +9,9 @@ const xsession = require('express-session');
 const passport = require('passport');
 const MySQLStore = require('express-mysql-session')(xsession);
 var LocalStrategy = require('passport-local').Strategy;
+const { check, validationResult } = require('express-validator');
 
 var db = require("./models");
-
 var app = express();
 var PORT = process.env.PORT || 3000;
 
@@ -27,6 +25,8 @@ app.use(passport.session());
 
 
 
+
+//CREDENTIALS FOR STORING THE SESSION IN THE DATABASE
 var options = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
@@ -36,6 +36,7 @@ var options = {
 
 
 };
+// STORE THE SESSION IN THE DATABASE
 var sessionStore = new MySQLStore(options);
 app.use(xsession({
   secret: 'jsjdsjndsndsjdnsjdnsdjsw',

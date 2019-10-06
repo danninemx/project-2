@@ -1,3 +1,9 @@
-.list-group-item {
-  line-height: 2.5;
-}
+.toggle-name {
+  display: none; }
+
+.profile-header {
+  padding: 20px; }
+
+.wrapper {
+  height: 100vh;
+  background-image: linear-gradient(to right bottom, rgba(235, 105, 5, 0.824), rgba(193, 10, 43, 0.5)); }

@@ -2,6 +2,7 @@ var db = require("../models");
 var express = require("express");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var xvalidator = require('express-validator');
 var bcrypt = require('bcryptjs');
 var saltRounds = 10;
 
@@ -28,22 +29,18 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/signup", (req,res)=>{
+  app.get("/api/users", (req,res)=>{
     
     db.users.findAll({}).then(function(result) {
       res.json(result);
     });
   })
-
-   //SIGN UP OR LOGIN  LOGIC
-    //CHECK IF VALUE IS 1 OR 0
-    //IF VALUE IS  0 WE WILL REGISTER THE USER
-    //IF VALUE IS  1 WE WILL LOGIN THE USER
+// SIGN UP AND LOGIN 
     app.post("/api/signup", (req,res)=>{
           //SIGN UP OR LOGIN  LOGIC
           //CHECK IF VALUE IS 1 OR 0
           //IF VALUE IS  0 WE WILL REGISTER THE USER
-          //IF VALUE IS  1 WE WILL LOGIN THE USER
+          //IF VALUE IS  1 WE WILL LOG THE USER IN
           if(req.body.loginActive === "0"){
            
             db.users.count({ 
@@ -54,13 +51,19 @@ module.exports = function(app) {
               console.log("You have an account with Us Please login")
       
               }else{
-                var email = req.body.email;
-                var password = req.body.password
+                const firstName = req.body.firstName
+                const lastName = req.body.lastName
+                const email = req.body.email;
+                const password = req.body.password
+      
+
       
                 //SIGN UP USER
                bcrypt.hash(password, saltRounds, function(err, hash) {
                   // Store hash in your password DB.
                   db.users.create({
+                    userFirstName: firstName,
+                    userLastName: lastName,
                     email: email,
                     password: hash
       
@@ -70,8 +73,9 @@ module.exports = function(app) {
                    
                     var user_id = result.id;
                     console.log("Success Sign up")
+      console.log(user_id)
                     req.login(user_id, function(err){
-                    res.redirect('/api/session');
+                    res.redirect('/');
                     })
                   
                   })
@@ -114,7 +118,7 @@ module.exports = function(app) {
                       console.log(user_id)
                     console.log("Success Login")
                      req.login(user_id, function(err){
-                      res.redirect('/api/session');
+                      res.redirect('/');
                       })
                         }
                     });
@@ -137,22 +141,41 @@ module.exports = function(app) {
  
    
   
-    
   
   //PROFILE ROUTE
-  app.get("/api/profile", (req,res)=>{
-    res.json(req.user)
+  //CHECK IF SESSION ID EXIST
+  app.get("/api/check/session/profile", (req,res)=>{
+   const session = {
+     user_id: req.user,
+     isSessionActive: req.isAuthenticated()
+   }
+     
+    res.json(session)
    
   })
-  
-// FIND SINGLE PROFILE ROUTE
-  app.get("/api/signup/:id", (req,res)=>{
+  //PROFILE ROUTE
+  app.get("/api/profile", (req,res)=>{
+    const session = {
+      user_id: req.user,
+      isSessionActive: req.isAuthenticated()
+    }
+      
+     db.users.findAll({
+       where: {id: session.user_id}
+     }).then(function(result){
+       console.log(result)
+       res.json(result)
+     })
+    
+   })
+// SINGLE  PROFILE ROUTE
+  app.get("/api/user/:id", (req,res)=>{
     
     db.users.findAll({ where: { id: req.params.id } }).then(function(dbExample) {
       res.json(dbExample);
     });
   })
-//Log out
+//LOGOUT 
   app.get('/logout', function(req, res){
     req.logout();
     req.session.destroy()
@@ -161,12 +184,10 @@ module.exports = function(app) {
 };
 
 
-  //  //Passport serializeUser and deserializeuser
-  //  passport.serializeUser((user_id, done)=>{
-  //   done(null, user_id)
-  // });
-  // passport.deserializeUser((user_id, done)=>{
-  //   done(null, user_id)
-  // });
-
+passport.serializeUser((user_id, done)=>{
+  done(null, user_id)
+});
+passport.deserializeUser((user_id, done)=>{
+  done(null, user_id)
+});
  
