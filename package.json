@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "compile:sass": "node-sass public/sass/main.scss public/styles/styles.css -w",
+    "sass": "node-sass public/sass/main.scss public/styles/styles.css -w",
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
     "test": "npm run lint && cross-env NODE_ENV=test mocha -u tdd --reporter spec --exit"
@@ -20,6 +20,9 @@
     "express-handlebars": "^3.1.0",
     "express-mysql-session": "^2.1.0",
     "express-session": "^1.16.2",
+    "express-validator": "^6.2.0",
+    "mailchimp": "^1.2.1",
+    "moment": "^2.24.0",
     "mysql2": "^1.6.5",
     "node-cron": "^2.0.3",
     "node-sass": "^4.12.0",
