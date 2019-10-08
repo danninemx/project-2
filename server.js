@@ -32,9 +32,8 @@ var options = {
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-
-
 };
+
 var sessionStore = new MySQLStore(options);
 app.use(xsession({
   secret: 'jsjdsjndsndsjdnsjdnsdjsw',
@@ -91,14 +90,55 @@ async function main() {
     }
   });
 
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
-    to: 'dudkny@gmail.com, projectgrouplynx@gmail.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world?', // plain text body
-    html: '<b>Hello world?</b>' // html body
-  });
+  // Query users table for recipients of lesson email.
+  let emailUsers = function() {
+    return $.ajax({
+      // Testing with lessonId of 1
+      url: "api/signup/",
+      type: "GET"
+    });  
+  }  
+
+  // Loop through each user.
+  for(ea in emailUsers) {
+
+    let recipient = ea[email];
+    let progress = ea[lastLessonId];
+    let contents = "";
+    
+    // Query guides table for elements of lesson email.
+    let emailLesson = function() {
+      return $.ajax({
+        // Testing with lessonId of 1
+        url: "api/email/" + progress,
+        type: "GET"
+      });
+    }
+
+    // Loop through email contents
+    for(ea in emailLesson) {
+      // Concatenate new element and add a line break.
+      contents += ea[content] + "</br>";
+    }
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
+      to: recipient, // list of receivers
+      cc: 'projectgrouplynx@gmail.com', // copy self
+      subject: "Today's Javascript lesson", // Subject line
+      // text: 'Hello world?', // plain text body
+      // html: '<b>Hello world?</b>'
+      html: contents // lesson contents
+    });
+
+  } // End of loop through users.
+
+  
+  //---------------------------------------------------------//
+  // TO-DO: Increment 1 to users table's lastLessonId value. //
+  //---------------------------------------------------------//
+
 
   console.log('Message sent: %s', info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>

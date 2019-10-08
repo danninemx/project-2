@@ -4,12 +4,44 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op; // Sequelize querying operator
+
 
 module.exports = function (app) {
   // Get all examples
   app.get("/api/examples", function (req, res) {
     db.Example.findAll({}).then(function (dbExamples) {
       res.json(dbExamples);
+    });
+  });
+
+  // Get contents for lesson email
+  app.get("/api/email/:lessonId", function(req, res) {
+    db.guide.findAll({
+      where: {
+        lessonId: req.params.lessonId, // parameter is lessonId
+        paragraph: {
+          [Op.lt]: 4 // < 4 rows of data.
+        },
+        // Arrange in ascending order of "paragraph" column
+        order: db.sequelize.col('paragraph')
+      }
+    }).then(function(results) {
+      res.json(results);
+    });
+  });
+
+  // Get contents for full guide on website
+  app.get("/api/guide/:lessonId", function(req, res) {
+    db.guide.findAll({
+      where: {
+        lessonId: req.params.lessonId, // parameter is lessonId
+        // Arrange in ascending order of "paragraph" column
+        order: db.sequelize.col('paragraph')
+      }
+    }).then(function(results) {
+      res.json(results);
     });
   });
 
