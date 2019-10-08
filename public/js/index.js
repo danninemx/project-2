@@ -4,7 +4,7 @@ var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
-var $sendButton = $("#send");
+var $sendUserIfnfo = $("#send");
 
 
 
@@ -169,4 +169,4 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
-$sendButton.on('click', saveUser)
+$sendUserIfnfo.on('click', saveUser)

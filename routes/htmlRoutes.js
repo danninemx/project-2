@@ -1,5 +1,7 @@
 var db = require("../models");
 require("passport");
+var moment = require('moment')
+
 
 
 module.exports = function(app) {
@@ -12,25 +14,20 @@ module.exports = function(app) {
   });
   // Load index page
   app.get("/", function(req, res) {
-  
     
+    res.render("index");
     
-   db.Example.findAll({}).then(function(dbExamples) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
-    });
-  });
+   });
 
  
 //LOGIN ROUTE
-  app.get("/login", function(req, res) {
+  app.get("/login", authenticationMiddlewareHome(), function(req, res) {
     
     res.render("login");
   });
   //PROFILE ROUTE
 app.get("/profile", authenticationMiddleware(), function(req, res) {
+  
   const session = {
     user_id: req.user,
     isSessionActive: req.isAuthenticated()
@@ -39,26 +36,18 @@ app.get("/profile", authenticationMiddleware(), function(req, res) {
    db.users.findAll({
      where: {id: session.user_id}
    }).then(function(result){
-     console.log(result)
+    console.log(result[0])
      res.render("profile", {
       msg: "Alex",
-      data: result
+      user: result[0],
+      createdAt: moment(result[0].createdAt, "YYYYMMDD").fromNow()
     });
    })
     
   });
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.render("example", {
-        example: dbExample
-      });
-    });
-  });
  
-  app.get('/settings',(req,res)=>{
+ 
+  app.get('/settings',  authenticationMiddleware(), (req,res)=>{
     res.render('settings')
   })
 
@@ -71,8 +60,26 @@ app.get("/profile", authenticationMiddleware(), function(req, res) {
 //THIS authenticationMiddleware FUNCTION IS USE TO CHECK IF USER IS LOGIN SO IT CAN RENDER THE PROFILE PAGE IF IS NOT AUTHENTICATED IT WILL RENDER THE LOGIN PAGE
 function authenticationMiddleware () {  
 	return (req, res, next) => {
-	 if (req.isAuthenticated()) return next();
-	    res.redirect('/login')
+	 if (req.isAuthenticated()) {
+    return next();
+   }else{
+    res.redirect('/login')
+   }
+	    
 	}
 }
+
+//THIS authenticationMiddlewareHome FUNCTION IS USE TO CHECK IF USER IS ACTIVE. IF USER IS ACTIVE IT WILL PREVENT THE USER GOING BACK TO THE LOGIN PAGE, UNLESS USER LOGOUT
+function authenticationMiddlewareHome() {  
+	return (req, res, next) => {
+	 if (!req.isAuthenticated()) {
+    return next();
+   }else{
+   
+    res.redirect('/')
+   }
+	    
+	}
+}
+
 

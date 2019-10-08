@@ -1,15 +1,20 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
-var http = require("http"); // For scheduled Heroku server waker
+var http = require("http")
+require('./dayly-email/email-sender.js')
+
+
+
+
+
 
 // For Account Manager
 const cookieparser = require('cookie-parser');
 const xsession = require('express-session');
 const passport = require('passport');
 const MySQLStore = require('express-mysql-session')(xsession);
-var LocalStrategy = require('passport-local').Strategy;
-const { check, validationResult } = require('express-validator');
+
 
 var db = require("./models");
 var app = express();
@@ -74,66 +79,13 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Scheduled Heroku server waker
-setInterval(function () {
-  http.get("https://immense-ridge-78589.herokuapp.com/");
-}, 1200000);
+setInterval(function (err) {
+ 
+  http.get("http://immense-ridge-78589.herokuapp.com/");
+  
+}, 300000);
 
 
-//------------//
-// Nodemailer //
-//------------//
-'use strict';
-const nodemailer = require('nodemailer');
-
-// async..await is not allowed in global scope, must use a wrapper
-async function main() {
-
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'projectgroupLynx@gmail.com',
-      pass: 'project-2'
-    }
-  });
-
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
-    to: 'dudkny@gmail.com, projectgrouplynx@gmail.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world?', // plain text body
-    html: '<b>Hello world?</b>' // html body
-  });
-
-  console.log('Message sent: %s', info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-}
-
-// Daily mass transmission task.
-let massSend = function () {
-  main().catch(console.error);
-}
-
-//--------------------------------------------------------------------//
-// TO-DO: ADD A ONE-TIME EMAIL TEMPLATE TO BE SENT UPON USER SIGN-UP. //
-//--------------------------------------------------------------------//
-
-//----------------//
-// Task Scheduler //
-//----------------//
-const cron = require('node-cron');
-
-// Schedule the daily mass transmission task.
-const daily = cron.schedule('0 7 * * *', () => {
-  console.log('Running daily job at 07:00');
-  massSend();
-}, {
-    scheduled: true
-  });
-
-// On load, Node-cron starts the mass transmission schedule.
-daily.start();
 
 //----------------------------------------------------------------------//
 // TO-DO: ADD A ONE-TIME TRANSMISSION TASK TO BE RUN UPON USER SIGN-UP. //
