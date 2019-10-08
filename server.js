@@ -5,10 +5,6 @@ var http = require("http")
 require('./dayly-email/email-sender.js')
 
 
-
-
-
-
 // For Account Manager
 const cookieparser = require('cookie-parser');
 const xsession = require('express-session');
@@ -29,8 +25,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
-
 //CREDENTIALS FOR STORING THE SESSION IN THE DATABASE
 var options = {
   host: process.env.DB_HOST,
@@ -38,9 +32,8 @@ var options = {
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-
-
 };
+
 // STORE THE SESSION IN THE DATABASE
 var sessionStore = new MySQLStore(options);
 app.use(xsession({
@@ -50,10 +43,6 @@ app.use(xsession({
   saveUninitialized: false
   // cookie: { secure: true }
 }))
-
-
-
-
 
 
 // Handlebars
@@ -80,9 +69,7 @@ if (process.env.NODE_ENV === "test") {
 
 // Scheduled Heroku server waker
 setInterval(function (err) {
- 
-  http.get("http://immense-ridge-78589.herokuapp.com/");
-  
+  http.get("http://immense-ridge-78589.herokuapp.com/"); 
 }, 300000);
 
 

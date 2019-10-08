@@ -9,11 +9,8 @@ var apiKey = 'basic 57450f850d36078973ddccd15d1db72b-us20';
 var request = require("request");
 const nodemailer = require('nodemailer');
 
-
-  
-
- 
-
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op; // Sequelize querying operator
 
 
 module.exports = function(app) {
