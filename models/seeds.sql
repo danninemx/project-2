@@ -1,7 +1,3 @@
--- For deployed DB only.
-USE t3pj2wlsyauwuv9g;
-
--- 
 CREATE TABLE guides (
     `id` INT NOT NULL AUTO_INCREMENT,
     `chapterId` INT(5) NOT NULL,
@@ -13,7 +9,6 @@ CREATE TABLE guides (
     PRIMARY KEY (id)
 );
 
-SELECT * FROM guides;
 
 
 INSERT INTO guides (chapterId, chapter, lessonId, lesson, paragraph, content)
@@ -36,7 +31,6 @@ VALUES (1, 'Grammar and Types', 1, 'Basics', 6, '<p>A semicolon is not necessary
 
 INSERT INTO guides (chapterId, chapter, lessonId, lesson, paragraph, content)
 VALUES (1, 'Grammar and Types', 1, 'Basics', 7, '<p>The source text of JavaScript script gets scanned from left to right and is converted into a sequence of input elements which are tokens, control characters, line terminators, comments, or whitespace. Spaces, tabs, and newline characters are considered whitespace.</p>');
-
 
 
 
@@ -63,7 +57,6 @@ VALUES (1, 'Grammar and Types', 2, 'Comments', 7, '<p><strong>Note</strong>: You
 
 
 
-
 INSERT INTO guides (chapterId, chapter, lessonId, lesson, paragraph, content)
 VALUES (1, 'Grammar and Types', 3, 'Declarations', 1, '<h2 id="Declarations">Declarations</h2>');
 
@@ -81,3 +74,7 @@ VALUES (1, 'Grammar and Types', 3, 'Declarations', 5, '<p><code>let</code>: Decl
 
 INSERT INTO guides (chapterId, chapter, lessonId, lesson, paragraph, content)
 VALUES (1, 'Grammar and Types', 3, 'Declarations', 6, '<p><code>const</code>: Declares a block-scoped, read-only named constant</p>');
+
+
+
+SELECT * FROM guides;
