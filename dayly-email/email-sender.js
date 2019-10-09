@@ -8,17 +8,11 @@ const nodemailer = require('nodemailer');
 // Nodemailer //
 //------------//
 
-db.users.findAll({}).then(function(result){
+db.users.findAll({}).then(function (result) {
 
- 
+  // async..await is not allowed in global scope, must use a wrapper
+  async function main() {
 
-// async..await is not allowed in global scope, must use a wrapper
-async function main() {
-  
-  for (var i = 0; i< result.length; i++){
-    
-    
-    
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -27,14 +21,73 @@ async function main() {
         pass: 'project-2'
       }
     });
-  
-    // send mail with defined transport object
-    let info = await transporter.sendMail({
-         from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
-            to: result[i].email, // list of receivers
-            subject: 'Hello ' + result[i].userFirstName, // Subject line
-            text: 'Hello world?', // plain text body
-           html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    for (var i = 0; i < result.length; i++) {
+
+      //-------------------Below is the part that used to be in server.js ----------//
+
+      // Query users table for recipients of lesson email.
+      let emailUsers = function () {
+        return $.ajax({
+          // Testing with lessonId of 1
+          url: "api/signup/",
+          type: "GET"
+        });
+      }
+
+      // Loop through each user.
+      for (ea in emailUsers) {
+
+        let recipient = ea[email];
+        let progress = ea[lastLessonId];
+        let contents = "";
+
+        // Query guides table for elements of lesson email.
+        let emailLesson = function () {
+          return $.ajax({
+            // Testing with lessonId of 1
+            url: "api/email/" + progress,
+            type: "GET"
+          });
+        }
+
+        // Loop through email contents
+        for (ea in emailLesson) {
+          // Concatenate new element and add a line break.
+          contents += ea[content] + "</br>";
+        }
+
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+          from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
+          to: recipient, // list of receivers
+          cc: 'projectgrouplynx@gmail.com', // copy self
+          subject: "Today's Javascript lesson", // Subject line
+          // text: 'Hello world?', // plain text body
+          // html: '<b>Hello world?</b>'
+          html: contents // lesson contents
+        });
+
+      } // End of loop through users.
+
+
+
+      //-------------------Above is the part that used to be in server.js ----------//
+
+
+
+      //---------------------------------------------------------//
+      // TO-DO: Increment 1 to users table's lastLessonId value. //
+      //---------------------------------------------------------//
+
+
+      // send mail with defined transport object
+      let info = await transporter.sendMail({
+        from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
+        to: result[i].email, // list of receivers
+        subject: 'Hello ' + result[i].userFirstName, // Subject line
+        text: 'Hello world?', // plain text body
+        html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
       <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
       <head>
@@ -492,27 +545,27 @@ async function main() {
       <!--[if (IE)]></div><![endif]-->
       </body>
       </html>`  // html body
-    });
-    
-    console.log('Message sent: %s', info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-  }
+      });
+
+      console.log('Message sent: %s', info.messageId);
+      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    }
   }
 
   // Daily mass transmission task.
   let massSend = function () {
     main().catch(console.error);
   }
-  
+
   //--------------------------------------------------------------------//
   // TO-DO: ADD A ONE-TIME EMAIL TEMPLATE TO BE SENT UPON USER SIGN-UP. //
   //--------------------------------------------------------------------//
-  
+
   //----------------//
   // Task Scheduler //
   //----------------//
-  
-  
+
+
   // Schedule the daily mass transmission task.
   const daily = cron.schedule('0 7 * * *', () => {
     //'0 7 * * *'
@@ -521,10 +574,10 @@ async function main() {
   }, {
       scheduled: true
     });
-  
+
   // On load, Node-cron starts the mass transmission schedule.
   daily.start();
-  
 
-  
+
+
 });
