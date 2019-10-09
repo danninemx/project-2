@@ -28,6 +28,7 @@ module.exports = function (app) {
         order: db.sequelize.col('paragraph')
       }
     }).then(function (results) {
+      console.log(results);
       res.json(results);
     });
   });
