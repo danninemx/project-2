@@ -13,148 +13,180 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op; // Sequelize querying operator
 
 
-module.exports = function(app) {
-  
-  app.get("/api/users", (req,res)=>{
-    
-    db.users.findAll({}).then(function(result) {
+module.exports = function (app) {
+
+
+  // Get contents for lesson email
+  app.get("/api/email/:lessonId", function (req, res) {
+    db.guide.findAll({
+      where: {
+        lessonId: req.params.lessonId, // parameter is lessonId
+        paragraph: {
+          [Op.lt]: 4 // < 4 rows of data.
+        },
+        // Arrange in ascending order of "paragraph" column
+        order: db.sequelize.col('paragraph')
+      }
+    }).then(function (results) {
+      res.json(results);
+    });
+  });
+
+  // Get contents for full guide on website
+  app.get("/api/guide/:lessonId", function (req, res) {
+    db.guide.findAll({
+      where: {
+        lessonId: req.params.lessonId, // parameter is lessonId
+        // Arrange in ascending order of "paragraph" column
+        order: db.sequelize.col('paragraph')
+      }
+    }).then(function (results) {
+      res.json(results);
+    });
+  });
+
+
+
+  app.get("/api/users", (req, res) => {
+
+    db.users.findAll({}).then(function (result) {
       res.json(result);
     });
   })
-// SIGN UP AND LOGIN 
-    app.post("/api/signup", (req,res)=>{
-          //SIGN UP OR LOGIN  LOGIC
-          //CHECK IF VALUE IS 1 OR 0
-          //IF VALUE IS  0 WE WILL REGISTER THE USER
-          //IF VALUE IS  1 WE WILL LOG THE USER IN
-          if(req.body.loginActive === "0"){
-           
-            db.users.count({ 
-              where: { email: req.body.email }
-            }).then(function(checkEmailData){
-              if( checkEmailData > 0){
-              
-              console.log("You have an account with Us Please login")
-      
-              }else{
-                const firstName = req.body.firstName
-                const lastName = req.body.lastName
-                const email = req.body.email;
-                const password = req.body.password
-     
-  
-      
+  // SIGN UP AND LOGIN 
+  app.post("/api/signup", (req, res) => {
+    //SIGN UP OR LOGIN  LOGIC
+    //CHECK IF VALUE IS 1 OR 0
+    //IF VALUE IS  0 WE WILL REGISTER THE USER
+    //IF VALUE IS  1 WE WILL LOG THE USER IN
+    if (req.body.loginActive === "0") {
 
-      
-                //SIGN UP USER
-               bcrypt.hash(password, saltRounds, function(err, hash) {
-                  // Store hash in your password DB.
-                  db.users.create({
-                    userFirstName: firstName,
-                    userLastName: lastName,
-                    email: email,
-                    password: hash
-      
-      
-                  }).then(function(result){
-                    //CALL THE  addEmailToMailhchimp() FUNCTION TO ADD THE EMAIL TO THE MAILCHIMP SERVER
-      saveEmailToMailchimp(result.email,result.userFirstName,result.userLastName)
-      //CALL THE  sendWelcomeMessage() FUNCTION TO SEND A WELCOME MESSAGE
-      
-      sendWelcomeMessage(result.email,result.userFirstName,result.userLastName,result.lastLessonId)
-                   
-                    var user_id = result.id;
-                    console.log("Success Sign up")
-      console.log(user_id)
-                    req.login(user_id, function(err){
-                    res.redirect('/');
-                    })
-                  
-                  })
-                });
-                
-                
-      
-              }
-            })
+      db.users.count({
+        where: { email: req.body.email }
+      }).then(function (checkEmailData) {
+        if (checkEmailData > 0) {
+
+          console.log("You have an account with Us Please login")
+
+        } else {
+          const firstName = req.body.firstName
+          const lastName = req.body.lastName
+          const email = req.body.email;
+          const password = req.body.password
+
+
+
+
+
+          //SIGN UP USER
+          bcrypt.hash(password, saltRounds, function (err, hash) {
+            // Store hash in your password DB.
+            db.users.create({
+              userFirstName: firstName,
+              userLastName: lastName,
+              email: email,
+              password: hash
+
+
+            }).then(function (result) {
+              //CALL THE  addEmailToMailhchimp() FUNCTION TO ADD THE EMAIL TO THE MAILCHIMP SERVER
+              saveEmailToMailchimp(result.email, result.userFirstName, result.userLastName)
+              //CALL THE  sendWelcomeMessage() FUNCTION TO SEND A WELCOME MESSAGE
+
+              sendWelcomeMessage(result.email, result.userFirstName, result.userLastName, result.lastLessonId)
+
+              var user_id = result.id;
+              console.log("Success Sign up")
+              console.log(user_id)
+              req.login(user_id, function (err) {
+                res.redirect('/');
+              })
+
+            })
+          });
+
+
+
+        }
+      })
       //
-      
-          }else{
-            db.users.count({ 
-              where: { email: req.body.email }
-            }).then(function(checkEmailData){
-              if( checkEmailData === 0){
-              
-              console.log("Please Sign Up")
-      
-              }else{
-      
-                //Login
-                db.users.findAll(
-                  {
-                    where: {email: req.body.email}
-                    }
-                    ).then(function(result) {
-                      bcrypt.compare(req.body.password,result[0].password, function(err, results) {
-                        // res == true
-                        if(err){
-                          console.log(err)
-                          
-                        };
-                        if(!results){
-                          console.log("Please Check your Email and Password")
-      
-                        }else{
-                       
-                     var user_id = result[0].id;
-                      console.log(user_id)
-                    console.log("Success Login")
-                     req.login(user_id, function(err){
-                      res.redirect('/');
-                      })
-                        }
-                    });
-          
-                  
-                });
-                
-                
-      
-              }
-            })
-           
-          }
-         
-      
-          
-          
-          })
-      
- 
-   
-  
-  
+
+    } else {
+      db.users.count({
+        where: { email: req.body.email }
+      }).then(function (checkEmailData) {
+        if (checkEmailData === 0) {
+
+          console.log("Please Sign Up")
+
+        } else {
+
+          //Login
+          db.users.findAll(
+            {
+              where: { email: req.body.email }
+            }
+          ).then(function (result) {
+            bcrypt.compare(req.body.password, result[0].password, function (err, results) {
+              // res == true
+              if (err) {
+                console.log(err)
+
+              };
+              if (!results) {
+                console.log("Please Check your Email and Password")
+
+              } else {
+
+                var user_id = result[0].id;
+                console.log(user_id)
+                console.log("Success Login")
+                req.login(user_id, function (err) {
+                  res.redirect('/');
+                })
+              }
+            });
+
+
+          });
+
+
+
+        }
+      })
+
+    }
+
+
+
+
+  })
+
+
+
+
+
   //PROFILE ROUTE
   //CHECK IF SESSION ID EXIST
-  app.get("/api/check/session/profile", (req,res)=>{
-   const session = {
-     user_id: req.user,
-     isSessionActive: req.isAuthenticated()
-   }
-     
+  app.get("/api/check/session/profile", (req, res) => {
+    const session = {
+      user_id: req.user,
+      isSessionActive: req.isAuthenticated()
+    }
+
     res.json(session)
-   
+
   })
-  
-// SINGLE  PROFILE ROUTE
-  app.get("/api/user/:id", (req,res)=>{
-    
-    db.users.findAll({ where: { id: req.params.id } }).then(function(dbExample) {
+
+  // SINGLE  PROFILE ROUTE
+  app.get("/api/user/:id", (req, res) => {
+
+    db.users.findAll({ where: { id: req.params.id } }).then(function (dbExample) {
       res.json(dbExample);
     });
   })
-//LOGOUT 
-  app.get('/logout', function(req, res){
+  //LOGOUT 
+  app.get('/logout', function (req, res) {
     req.logout();
     req.session.destroy()
     res.redirect('/');
@@ -164,65 +196,71 @@ module.exports = function(app) {
 };
 
 
-passport.serializeUser((user_id, done)=>{
+passport.serializeUser((user_id, done) => {
   done(null, user_id)
 });
-passport.deserializeUser((user_id, done)=>{
+passport.deserializeUser((user_id, done) => {
   done(null, user_id)
 });
- 
-const saveEmailToMailchimp = function(email,firstName,lastName){
 
-var options = { method: 'POST',
-  url: 'https://us20.api.mailchimp.com/3.0/lists/5544bea55b/members',
-  headers: 
-   { Authorization: apiKey,
-     'Content-Type': 'application/json' },
-  body: 
-   { email_address: email,
-     status: 'subscribed',
-     merge_fields: 
-      { FNAME: firstName,
-        LNAME: lastName } 
-      },
-  json: true 
-};
+const saveEmailToMailchimp = function (email, firstName, lastName) {
 
-request(options, function (error, response, body) {
-  if (error){
-    console.log(error);
-  }else{
-    console.log(body);
-  }
+  var options = {
+    method: 'POST',
+    url: 'https://us20.api.mailchimp.com/3.0/lists/5544bea55b/members',
+    headers:
+    {
+      Authorization: apiKey,
+      'Content-Type': 'application/json'
+    },
+    body:
+    {
+      email_address: email,
+      status: 'subscribed',
+      merge_fields:
+      {
+        FNAME: firstName,
+        LNAME: lastName
+      }
+    },
+    json: true
+  };
 
-  
-});
+  request(options, function (error, response, body) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(body);
+    }
+
+
+  });
 }
 
-const sendWelcomeMessage = function(email,firstName,lastName,lastLessonId){
+const sendWelcomeMessage = function (email, firstName, lastName, lastLessonId) {
   console.log("Email send")
   async function main() {
-  
-    
-      
-      
-      
-      // create reusable transporter object using the default SMTP transport
-      let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'projectgroupLynx@gmail.com',
-          pass: 'project-2'
-        }
-      });
-    
-      // send mail with defined transport object
-      let info = await transporter.sendMail({
-           from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
-              to: email, // list of receivers
-              subject: 'Hello ' + firstName + ' ' + lastName, // Subject line
-              text: 'Hello world?', // plain text body
-             html: `<!DOCTYPE html>
+
+
+
+
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'projectgroupLynx@gmail.com',
+        pass: 'project-2'
+      }
+    });
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: 'Hello ' + firstName + ' ' + lastName, // Subject line
+      text: 'Hello world?', // plain text body
+      html: `<!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
@@ -353,12 +391,12 @@ const sendWelcomeMessage = function(email,firstName,lastName,lastLessonId){
             
         </body>
         </html>`  // html body
-      });
-      
-      console.log('Message sent: %s', info.messageId);
-      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-    
-    }
+    });
 
-    main()
+    console.log('Message sent: %s', info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  }
+
+  main()
 }
