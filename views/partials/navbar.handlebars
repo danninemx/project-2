@@ -1,0 +1,23 @@
+<div class="wrapper">
+<ul class="nav justify-content-end" id="custom-nav">
+  <li class="nav-item">
+    <a class="nav-link active" id="home" href="/">Home</a>
+  </li>
+  {{#if isAuthenticated}}
+    <li class="nav-item">
+    <a class="nav-link" id="profile" href="/profile">profile</a>
+  </li>
+  <li class="nav-item" id="logontainer">
+    <a class="nav-link" id="login" href="/logout"><i class="fas fa-power-off"></i></a>
+  </li>
+   <li class="nav-item" id="logontainer">
+    <a class="nav-link" id="login" href="/settings"><i class="fas fa-user-cog"></i></a>
+  </li>
+ 
+ {{else}}
+ <li class="nav-item" id="logontainer">
+    <a class="nav-link" id="login" href="/login"><i class="fas fa-sign-in-alt"></i></a>
+  </li>
+   {{/if}}
+  </ul>
+  
