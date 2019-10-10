@@ -91,11 +91,14 @@ module.exports = function (app) {
 
 
             }).then(function (result) {
+
+              /*
+              // *** REVIEW: This is likely incomplete experiementation code. *** //
               //CALL THE  addEmailToMailhchimp() FUNCTION TO ADD THE EMAIL TO THE MAILCHIMP SERVER
               saveEmailToMailchimp(result.email, result.userFirstName, result.userLastName)
               //CALL THE  sendWelcomeMessage() FUNCTION TO SEND A WELCOME MESSAGE
-
               sendWelcomeMessage(result.email, result.userFirstName, result.userLastName, result.lastLessonId)
+              */
 
               var user_id = result.id;
               console.log("Success Sign up")
@@ -205,6 +208,9 @@ passport.deserializeUser((user_id, done) => {
   done(null, user_id)
 });
 
+
+/*
+// *** REVIEW: This is likely incomplete experiementation code. *** //
 const saveEmailToMailchimp = function (email, firstName, lastName) {
 
   var options = {
@@ -311,88 +317,88 @@ const sendWelcomeMessage = function (email, firstName, lastName, lastLessonId) {
           bottom: 0;
           width: 100%;
           background-color: plum;
-          
-          
+
+
             }
-            
-            /* For desktop: */
-        .col-1 {width: 8.33%;}
-        .col-2 {width: 16.66%;}
-        .col-3 {width: 25%;}
-        .col-4 {width: 33.33%;}
-        .col-5 {width: 41.66%;}
-        .col-6 {width: 50%;}
-        .col-7 {width: 58.33%;}
-        .col-8 {width: 66.66%;}
-        .col-9 {width: 75%;}
-        .col-10 {width: 83.33%;}
-        .col-11 {width: 91.66%;}
-        .col-12 {width: 100%;}
-        
-            @media only screen and (max-width: 768px) {
-          /* For mobile phones: */
-          [class*="col-"] {
-            width: 100%;
-          }
-        }
-        
-            </style>
-            <title></title>
-        </head>
-        <body>
-            <div class="wrapper" style="background-color: brown;width: 90%;margin: 0 auto;">
-                <div class="container-fluid" style="width: 100%;margin: 0 auto;">
-                    <h1 class="title" style="text-align: center;letter-spacing: 5px;background-color: plum;font-size: 30px;">${firstName} LYNX WELCOMES YOU!</h1>
-                </div>
-                <div class="container" style="width: 90%;margin: 0 auto;">
-                    <div class="row" style="background-color: yellowgreen;">
-                        <div class="col-md-6 center" style="float: left;width: 50%;text-align: center;">
-                            <h2>Lessons To pick</h2>
-                            <div class="container" style="width: 90%;margin: 0 auto;">
-                                <ul class="ul" style="list-style-type: none;">
-                                    <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">Javascript</li>
-                                    <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">node js</li>
-                                    <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">css</li>
-                                    <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">Express</li>
-                                    <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">npm</li>
-                                </ul>
-                            </div>
-        
-                        </div>
-                        <div class="col-md-6 center" style="float: left;width: 50%;text-align: center;">
-                            <h2>You have ${lastLessonId}  Lessons</h2>
-                            <div class="container" style="width: 90%;margin: 0 auto;">
-                                    <ul class="ul" style="list-style-type: none;">
-                                        <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;"></li>
-                                        <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;"></li>
-                                        <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;"></li>
-                                        <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;"></li>
-                                        <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">npm</li>
-                                    </ul>
-                                </div>
-        
-                            
-                        </div>
-                    </div>
-                </div>
+
+            // For desktop:
+        .col - 1 { width: 8.33 %; }
+        .col - 2 { width: 16.66 %; }
+        .col - 3 { width: 25 %; }
+        .col - 4 { width: 33.33 %; }
+        .col - 5 { width: 41.66 %; }
+        .col - 6 { width: 50 %; }
+        .col - 7 { width: 58.33 %; }
+        .col - 8 { width: 66.66 %; }
+        .col - 9 { width: 75 %; }
+        .col - 10 { width: 83.33 %; }
+        .col - 11 { width: 91.66 %; }
+        .col - 12 { width: 100 %; }
+
+@media only screen and(max - width: 768px) {
+  // For mobile phones:
+  [class*= "col-"] {
+    width: 100 %;
+  }
+}
+
+            </style >
+  <title></title>
+        </head >
+  <body>
+    <div class="wrapper" style="background-color: brown;width: 90%;margin: 0 auto;">
+      <div class="container-fluid" style="width: 100%;margin: 0 auto;">
+        <h1 class="title" style="text-align: center;letter-spacing: 5px;background-color: plum;font-size: 30px;">${firstName} LYNX WELCOMES YOU!</h1>
+      </div>
+      <div class="container" style="width: 90%;margin: 0 auto;">
+        <div class="row" style="background-color: yellowgreen;">
+          <div class="col-md-6 center" style="float: left;width: 50%;text-align: center;">
+            <h2>Lessons To pick</h2>
+            <div class="container" style="width: 90%;margin: 0 auto;">
+              <ul class="ul" style="list-style-type: none;">
+                <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">Javascript</li>
+                <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">node js</li>
+                <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">css</li>
+                <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">Express</li>
+                <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">npm</li>
+              </ul>
             </div>
-            <div class="footer" style="position: fixed;left: 0;bottom: 0;width: 100%;background-color: plum;">
-                <div class="container" style="width: 90%;margin: 0 auto;">
-                    <div class="row" style="background-color: yellowgreen;">
-                        <div class="col-sm-12 col-md-6 col-lg-6" style="float: left;width: 50%;">
-                                <p class="copy-rights">Copy Rights Group LYNX  2019</p>
-        
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6" style="float: left;width: 50%;">
-                            <p class="github">GitHub</p>
-        
-                        </div>
-                    </div>
-                </div>
+
+          </div>
+          <div class="col-md-6 center" style="float: left;width: 50%;text-align: center;">
+            <h2>You have ${lastLessonId}  Lessons</h2>
+            <div class="container" style="width: 90%;margin: 0 auto;">
+              <ul class="ul" style="list-style-type: none;">
+                <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;"></li>
+                <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;"></li>
+                <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;"></li>
+                <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;"></li>
+                <li class="col-12 left" style="text-align: left;padding-left: 10px;width: 100%;">npm</li>
+              </ul>
             </div>
-            
-        </body>
-        </html>`  // html body
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer" style="position: fixed;left: 0;bottom: 0;width: 100%;background-color: plum;">
+      <div class="container" style="width: 90%;margin: 0 auto;">
+        <div class="row" style="background-color: yellowgreen;">
+          <div class="col-sm-12 col-md-6 col-lg-6" style="float: left;width: 50%;">
+            <p class="copy-rights">Copy Rights Group LYNX  2019</p>
+
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6" style="float: left;width: 50%;">
+            <p class="github">GitHub</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+        </html > `  // html body
     });
 
     console.log('Message sent: %s', info.messageId);
@@ -402,3 +408,4 @@ const sendWelcomeMessage = function (email, firstName, lastName, lastLessonId) {
 
   main()
 }
+*/
