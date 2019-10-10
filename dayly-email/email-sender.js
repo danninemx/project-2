@@ -29,9 +29,9 @@ function maxSend(fn, em) {
   let contents = `
 <h2>Great job, ${fn}!</h2>
 </br>
-<p>You have finished all of the lessons available at this time.</p>
+<p>You have completed all of the lessons available at this time.</p>
 </br>
-<p>We will check you know tomorrow if we have anything else.</p>
+<p>We will inform you tomorrow if we have a new lesson for you.</p>
 </br>
 <p>In the mean time, feel free to explore <a href='${deployURL}/api/js/methods'>these additional resources</a>!</p>
 </br>
@@ -48,7 +48,7 @@ function maxSend(fn, em) {
     html: contents // message body
   });
 
-}     // End of maxSend()
+} // End of maxSend()
 
 
 

@@ -14,6 +14,50 @@ const Op = Sequelize.Op; // Sequelize querying operator
 
 
 module.exports = function (app) {
+  //API for all data in table cssData
+  app.get('/api/css/properties', (req, res) => {
+    db.cssData.findAll({}).then((result) => {
+      res.json(result)
+    })
+  })
+
+  //API for single result in table cssData
+  app.get('/api/css/properties/:name', (req, res) => {
+    db.cssData.findAll({ where: { properties: req.params.name } }).then((result) => {
+      res.json(result)
+    })
+  })
+
+
+  //API for all data in table jsMethodsData
+  app.get('/api/js/methods', (req, res) => {
+    db.jsMethodsData.findAll({}).then((result) => {
+      res.json(result)
+    })
+  })
+
+  //API for single result in table jsMethodsData
+  app.get('/api/js/methods/:name', (req, res) => {
+    db.jsMethodsData.findAll({ where: { method: req.params.name } }).then((result) => {
+      res.json(result)
+    })
+  })
+
+
+  //API for all data in table HtmlData
+  app.get('/api/html/tag', (req, res) => {
+    db.HtmlData.findAll({}).then((result) => {
+      res.json(result)
+    })
+  })
+
+  //API for single result in table HtmlData
+  app.get('/api/html/tag/:name', (req, res) => {
+    db.HtmlData.findAll({ where: { tag: req.params.name } }).then((result) => {
+      res.json(result)
+    })
+  })
+
 
   // Call this to send lesson email to a single user upon signup
   function singleSend(fn, em) {
