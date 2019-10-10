@@ -10,21 +10,22 @@ The link on the email guides the users to the website where they can learn more 
 
 ## How it works
 
-1. User subscribes to the web app.
+1. User subscribes to the web app and receives an introductory email.
 
-2. Server sends out scheduled emails containing daily dose of information.
+2. Server sends out scheduled emails containing daily lesson. If none remains, the user will be recommended a comprehensive reading material.
 
-3. User can choose to follow the emailed link to the website, which renders the details about the data.
+3. User can choose to follow the emailed link to the website, which provides further detail about the subject.
 
-4. The web app also displays related topics that the users can explore.
+4. The web app also displays related subjects that the users can explore at will.
 
-5. Learn away!
+5. Get smarter every day!
 
 ---
 
-## Components
+## Components (alphabetical)
 
 - [Node.js](https://nodejs.org/en/)
+- [NPM: Chalk](https://www.npmjs.com/package/chalk)
 - [NPM: Express](https://www.npmjs.com/package/express)
 - [NPM: Express Handlebars](https://www.npmjs.com/package/express-handlebars)
 - [NPM: MySQL 2](https://www.npmjs.com/package/mysql2)

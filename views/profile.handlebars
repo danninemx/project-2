@@ -1,29 +1,33 @@
-
 <div class="jumbotron-fluid profile-header">
-<div class="container-fluid">
-  <div class="container">
-    <h1 class="welcome-message">Welcome {{user.userFirstName}}</h1>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 col-md-4 col-lg-4 user-info">
-        <div class="container">
-    <h1>Account</h1>
-  </div>
-   <ul class="list-group">
-  <li class="list-group-item"><span class="text-muted">Name:</span> {{user.userFirstName}} {{user.userLastName}} </li>
-  <li class="list-group-item"><span class="text-muted">Email:</span> {{user.email}}</li>
-  <li class="list-group-item"><span class="text-muted">Member since:</span> {{createdAt}} </li>
-  {{#if user.lastLessonId}}
- 
-  <li class="list-group-item">You have {{ user.lastLessonId}} Lessons</li>
-  {{else}}
-   <li class="list-group-item">You dont have any lessons yet {{user.lastLessoniId}}</li>
-  {{/if}}
-</ul>
+  <div class="container-fluid">
+    <div class="container">
+      <h1 class="welcome-message">Welcome {{user.userFirstName}}</h1>
     </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-4 col-lg-4 user-info">
+        <div class="container">
+          <h1>Account</h1>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item"><span class="text-muted">Name:</span> {{user.userFirstName}} {{user.userLastName}}
+          </li>
+          <li class="list-group-item"><span class="text-muted">Email:</span> {{user.email}}</li>
+          <li class="list-group-item"><span class="text-muted">Member since:</span> {{createdAt}} </li>
+
+          {{!-- {{#if user.lastLessonId}}
+ 
+          <li class="list-group-item">You have {{ user.lastLessonId}} Lessons</li>
+          {{else}}
+          <li class="list-group-item">You dont have any lessons yet {{user.lastLessoniId}}</li>
+          {{/if}} --}}
+
+          <li class="list-group-item">Lessons completed: {{user.lastLessonId}}</li>
+
+        </ul>
+      </div>
       <div class="col-sm-12 col-md-8 col-lg-8 user-dashboard">
 
+      </div>
     </div>
   </div>
-</div>
 </div>
