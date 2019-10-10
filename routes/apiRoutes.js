@@ -15,6 +15,43 @@ const Op = Sequelize.Op; // Sequelize querying operator
 
 module.exports = function (app) {
 
+  // Call this to send lesson email to a single user upon signup
+  function singleSend(fn, em) {
+
+    // Create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'projectgroupLynx@gmail.com',
+        pass: 'project-2'
+      }
+    });
+
+    let contents = `
+<h2>Welcome, ${fn}.</h2>
+</br>
+<p>You have been enrolled into our daily lessons program.</p>
+</br>
+<p>Starting tomorrow, you will receive our lesson by email every day at 7:00 AM CT.</p>
+</br>
+<p>Prepare to become smarter every day!</p>
+</br>
+<p>Sincerely,</p>
+<h3>Your friends at <strong>Group Lynx</strong></h3>
+`;
+
+    // Send mail with defined transport object
+    transporter.sendMail({
+      from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
+      to: em,
+      cc: 'projectgrouplynx@gmail.com',
+      subject: "Greetings from Group Lynx",
+      html: contents // message body
+    });
+
+  }     // End of singleSend()
+
+
   // *** REVIEW: Likely no need to call from index.js. *** //
   // // Get contents for lesson email
   // app.get("/api/email/:lessonId", function (req, res) {
@@ -77,9 +114,6 @@ module.exports = function (app) {
           const password = req.body.password
 
 
-
-
-
           //SIGN UP USER
           bcrypt.hash(password, saltRounds, function (err, hash) {
             // Store hash in your password DB.
@@ -88,7 +122,6 @@ module.exports = function (app) {
               userLastName: lastName,
               email: email,
               password: hash
-
 
             }).then(function (result) {
 
@@ -99,6 +132,8 @@ module.exports = function (app) {
               //CALL THE  sendWelcomeMessage() FUNCTION TO SEND A WELCOME MESSAGE
               sendWelcomeMessage(result.email, result.userFirstName, result.userLastName, result.lastLessonId)
               */
+
+              singleSend(firstName, email);
 
               var user_id = result.id;
               console.log("Success Sign up")
@@ -207,6 +242,9 @@ passport.serializeUser((user_id, done) => {
 passport.deserializeUser((user_id, done) => {
   done(null, user_id)
 });
+
+
+
 
 
 /*
