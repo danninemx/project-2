@@ -35,6 +35,15 @@ function massSend() {
       let progress = result[i].lastLessonId;
       let contents = "";
 
+      //---------------------------------------------------------//
+      // TO-DO: Increment 1 to users table's lastLessonId value. //
+      //---------------------------------------------------------//
+      // `UPDATE users
+      // SET lastLessonId = 1 
+      // WHERE id = 1;
+      // `
+
+
       // Query the guides table for HTML components needed for the user's lesson email.
       db.guide.findAll({
         where: {
@@ -69,14 +78,6 @@ function massSend() {
 
         } // End loop through email components
       }); // End of the guides table query
-
-      //---------------------------------------------------------//
-      // TO-DO: Increment 1 to users table's lastLessonId value. //
-      //---------------------------------------------------------//
-      // `UPDATE users
-      // SET lastLessonId = 1 
-      // WHERE id = 1;
-      // `
 
     } // End of the loop through the users
   })   // End of the users table query
