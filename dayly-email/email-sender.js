@@ -51,6 +51,9 @@ function main() {
           // If the final component was concatenated...
           if (j === (res.length - 1)) {
 
+            // TO-DO: Append link to the guide page
+            // contents += "<a href='' ";
+
             // Send mail with defined transport object
             transporter.sendMail({
               from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
@@ -80,7 +83,7 @@ function main() {
 
 // Immediate send test.
 // massSend();
-// main();
+main();
 
 //--------------------------------------------------------------------//
 // TO-DO: ADD A ONE-TIME EMAIL TEMPLATE TO BE SENT UPON USER SIGN-UP. //
