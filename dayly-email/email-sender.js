@@ -152,7 +152,7 @@ function singleSend() {
 
     } // End of the loop through the users
   })   // End of the users table query
-}     // End of massSend()
+}     // End of singleSend()
 */
 
 

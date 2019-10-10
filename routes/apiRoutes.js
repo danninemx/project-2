@@ -15,36 +15,37 @@ const Op = Sequelize.Op; // Sequelize querying operator
 
 module.exports = function (app) {
 
+  // *** REVIEW: Likely no need to call from index.js. *** //
+  // // Get contents for lesson email
+  // app.get("/api/email/:lessonId", function (req, res) {
+  //   db.guide.findAll({
+  //     where: {
+  //       lessonId: req.params.lessonId, // parameter is lessonId
+  //       paragraph: {
+  //         [Op.lt]: 4 // < 4 rows of data.
+  //       },
+  //       // Arrange in ascending order of "paragraph" column
+  //       order: db.sequelize.col('paragraph')
+  //     }
+  //   }).then(function (results) {
+  //     console.log(results);
+  //     res.json(results);
+  //   });
+  // });
 
-  // Get contents for lesson email
-  app.get("/api/email/:lessonId", function (req, res) {
-    db.guide.findAll({
-      where: {
-        lessonId: req.params.lessonId, // parameter is lessonId
-        paragraph: {
-          [Op.lt]: 4 // < 4 rows of data.
-        },
-        // Arrange in ascending order of "paragraph" column
-        order: db.sequelize.col('paragraph')
-      }
-    }).then(function (results) {
-      console.log(results);
-      res.json(results);
-    });
-  });
-
-  // Get contents for full guide on website
-  app.get("/api/guide/:lessonId", function (req, res) {
-    db.guide.findAll({
-      where: {
-        lessonId: req.params.lessonId, // parameter is lessonId
-        // Arrange in ascending order of "paragraph" column
-        order: db.sequelize.col('paragraph')
-      }
-    }).then(function (results) {
-      res.json(results);
-    });
-  });
+  // *** REVIEW: Likely no need to call from index.js. *** //
+  // // Get contents for full guide on website
+  // app.get("/api/guide/:lessonId", function (req, res) {
+  //   db.guide.findAll({
+  //     where: {
+  //       lessonId: req.params.lessonId, // parameter is lessonId
+  //       // Arrange in ascending order of "paragraph" column
+  //       order: db.sequelize.col('paragraph')
+  //     }
+  //   }).then(function (results) {
+  //     res.json(results);
+  //   });
+  // });
 
 
 
