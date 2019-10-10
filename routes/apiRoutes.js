@@ -14,7 +14,19 @@ const Op = Sequelize.Op; // Sequelize querying operator
 
 
 module.exports = function (app) {
+//API for all data in table cssData
+app.get('/api/css/properties',(req,res)=>{
+  db.cssData.findAll({ attributes: ['id', 'properties','definitions']}).then((result)=>{
+    res.json(result)
+  })
+}) 
 
+//API for single result in table cssData
+app.get('/api/css/properties/:name',(req,res)=>{
+  db.cssData.findAll({where: {properties: req.params.name}}).then((result)=>{
+    res.json(result)
+  })
+}) 
 
   // Get contents for lesson email
   app.get("/api/email/:lessonId", function (req, res) {
