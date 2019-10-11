@@ -1,0 +1,24 @@
+html{
+  background:rgb(164, 219, 164);
+}
+
+#heroHTML {
+   font-size:633% !important;
+}
+#first{
+  background:rgb(241, 237, 237);
+  border-radius:10px;
+}
+#second{
+  background:rgb(221, 211, 211);
+  border-radius:10px;
+}
+
+#note-id{
+border-radius:15px;
+}
+
+#section1{
+  background:rgb(246, 245, 245);
+
+}
