@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
-  var Example = sequelize.define("Example", {
-    text: DataTypes.STRING,
+  var html = sequelize.define("html", {
+    tag: DataTypes.STRING,
     description: DataTypes.TEXT
   });
-  return Example;
+  return html;
 };
