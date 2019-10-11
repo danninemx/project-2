@@ -104,10 +104,10 @@ module.exports = function (app) {
   })
   // SIGN UP AND LOGIN 
   app.post("/api/signup", (req, res) => {
-    //SIGN UP OR LOGIN  LOGIC
-    //CHECK IF VALUE IS 1 OR 0
-    //IF VALUE IS  0 WE WILL REGISTER THE USER
-    //IF VALUE IS  1 WE WILL LOG THE USER IN
+    //SIGN UP OR LOGIN  LOGIC
+    //CHECK IF VALUE IS 1 OR 0
+    //IF VALUE IS  0 WE WILL REGISTER THE USER
+    //IF VALUE IS  1 WE WILL LOG THE USER IN
     if (req.body.loginActive === "0") {
 
       db.users.count({
@@ -115,7 +115,7 @@ module.exports = function (app) {
       }).then(function (checkEmailData) {
         if (checkEmailData > 0) {
 
-          console.log("You have an account with Us Please login")
+          console.log("You have an account with Us Please login")
 
         } else {
           const firstName = req.body.firstName
@@ -124,9 +124,9 @@ module.exports = function (app) {
           const password = req.body.password
 
 
-          //SIGN UP USER
+          //SIGN UP USER
           bcrypt.hash(password, saltRounds, function (err, hash) {
-            // Store hash in your password DB.
+            // Store hash in your password DB.
             db.users.create({
               userFirstName: firstName,
               userLastName: lastName,
@@ -138,7 +138,7 @@ module.exports = function (app) {
               singleSend(firstName, email);
 
               var user_id = result.id;
-              console.log("Success Sign up")
+              console.log("Success Sign up")
               console.log(user_id)
               req.login(user_id, function (err) {
                 res.redirect('/');
@@ -159,7 +159,7 @@ module.exports = function (app) {
       }).then(function (checkEmailData) {
         if (checkEmailData === 0) {
 
-          console.log("Please Sign Up")
+          console.log("Please Sign Up")
 
         } else {
 
@@ -170,19 +170,19 @@ module.exports = function (app) {
             }
           ).then(function (result) {
             bcrypt.compare(req.body.password, result[0].password, function (err, results) {
-              // res == true
+              // res == true
               if (err) {
                 console.log(err)
 
               };
               if (!results) {
-                console.log("Please Check your Email and Password")
+                console.log("Please Check your Email and Password")
 
               } else {
 
                 var user_id = result[0].id;
                 console.log(user_id)
-                console.log("Success Login")
+                console.log("Success Login")
                 req.login(user_id, function (err) {
                   res.redirect('/');
                 })
@@ -244,4 +244,3 @@ passport.serializeUser((user_id, done) => {
 passport.deserializeUser((user_id, done) => {
   done(null, user_id)
 });
-
