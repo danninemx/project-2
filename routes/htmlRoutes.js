@@ -25,25 +25,25 @@ module.exports = function (app) {
 
     res.render("login");
   });
+  
   //PROFILE ROUTE
-  app.get("/profile", authenticationMiddleware(), function (req, res) {
-
-    const session = {
-      user_id: req.user,
-      isSessionActive: req.isAuthenticated()
-    }
-
-    db.users.findAll({
-      where: { id: session.user_id }
-    }).then(function (result) {
-      console.log(result[0])
-      res.render("profile", {
-        msg: "Alex",
-        user: result[0],
-        createdAt: moment(result[0].createdAt, "YYYYMMDD").fromNow()
-      });
-    })
-
+app.get("/profile", authenticationMiddleware(), function(req, res) {
+  
+  const session = {
+    user_id: req.user,
+    isSessionActive: req.isAuthenticated()
+  }
+    
+   db.users.findAll({
+     where: {id: session.user_id}
+   }).then(function(result){
+    console.log(result[0])
+     res.render("profile", {
+      msg: result[0].userFirstName,
+      user: result[0],
+      createdAt: moment(result[0].createdAt, "YYYYMMDD").fromNow()
+    });
+   })
   });
 
 
@@ -53,25 +53,25 @@ module.exports = function (app) {
   })
 
   //HTML TAGS ROUTE
-  app.get('/html/tag', authenticationMiddleware(), (req, res) => {
+  app.get('/html/tag',(req,res)=>{
     res.render('htmltag')
   })
-  //HTML COUNTRY CODES  ROUTE
-  app.get('/html/country/codes', authenticationMiddleware(), (req, res) => {
+   //HTML COUNTRY CODES  ROUTE
+   app.get('/html/country/codes',(req,res)=>{
     res.render('htmlcc')
   })
   //CSS PROPERTIES ROUTE
-  app.get('/css/properties', authenticationMiddleware(), (req, res) => {
+  app.get('/css/properties',(req,res)=>{
     res.render('settings')
   })
 
   //JS METHODS ROUTE
-  app.get('/js/methods', authenticationMiddleware(), (req, res) => {
+  app.get('/js/methods',(req,res)=>{
     res.render('jsmethods')
   })
 
   //COUNTRY CODES ROUTE
-  app.get('/server/codes', authenticationMiddleware(), (req, res) => {
+  app.get('/server/codes',(req,res)=>{
     res.render('serve')
   })
   // Render 404 page for any unmatched routes
