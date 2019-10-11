@@ -51,6 +51,28 @@ app.get("/profile", authenticationMiddleware(), function(req, res) {
     res.render('settings')
   })
 
+  //HTML TAGS ROUTE
+  app.get('/html/tag',  authenticationMiddleware(), (req,res)=>{
+    res.render('htmltag')
+  })
+   //HTML COUNTRY CODES  ROUTE
+   app.get('/html/country/codes',  authenticationMiddleware(), (req,res)=>{
+    res.render('htmlcc')
+  })
+  //CSS PROPERTIES ROUTE
+  app.get('/css/properties',  authenticationMiddleware(), (req,res)=>{
+    res.render('settings')
+  })
+
+  //JS METHODSN ROUTE
+  app.get('/js/methods',  authenticationMiddleware(), (req,res)=>{
+    res.render('jsmethods')
+  })
+
+  //COUNTRY CODES ROUTE
+  app.get('/server/codes',  authenticationMiddleware(), (req,res)=>{
+    res.render('serve')
+  })
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
