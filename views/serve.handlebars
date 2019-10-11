@@ -1,0 +1,339 @@
+ <!-- Hero -->
+    <div class="block">
+      <section class="hero is-primary is-medium">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title is-size-1" id="heroHTML">
+              ...HTML <SPAN CLASS="is-size-2">Status Codes</SPAN>
+            </h1>
+            <h2 class="subtitle">“le sens commun est fort rare”</h2>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Container for table -->
+    <div class="container is-fluid">
+      <section class="section" id="section1">
+        <div class="container has-text-centered">
+          <div class="columns is-multiline">
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">1xx</h4>
+              <p class="subtitle is-6">Information</p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">100 Continue</h4>
+              <p class="subtitle is-6">
+                The server has received the request headers, and the client
+                should proceed to send the request body
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">100 Switching Protocols</h4>
+              <p class="subtitle is-6">
+                The requester has asked the server to switch protocols
+              </p>
+            </div>
+
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">103 Checkpoint</h4>
+              <p class="subtitle is-6">
+                Used in the resumable requests proposal to resume aborted PUT or
+                POST requests
+              </p>
+            </div>
+              <div class="column is-6 is-3-desktop">
+                <h4 class="title is-spaced is-4">2xx</h4>
+                <p class="subtitle is-6">Successful</p>
+              </div>
+              <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">200 OK</h4>
+              <p class="subtitle is-6">
+                The request is OK (this is the standard response for successful
+                HTTP requests)
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">201 Created</h4>
+              <p class="subtitle is-6">
+                The request has been fulfilled, and a new resource is created
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">202 Accepted</h4>
+              <p class="subtitle is-6">
+                The request has been accepted for processing, but the processing
+                has not been completed
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">
+                203 Non-Authoritative Information
+              </h4>
+              <p class="subtitle is-6">
+                The request has been successfully processed, but is returning
+                information that may be from another source
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">204 No Content</h4>
+              <p class="subtitle is-6">
+                The request has been successfully processed, but is not
+                returning any content
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">205 Reset Content</h4>
+              <p class="subtitle is-6">
+                The request has been successfully processed, but is not
+                returning any content, and requires that the requester reset the
+                document view
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">206 Partial Content</h4>
+              <p class="subtitle is-6">
+                The server is delivering only part of the resource due to a
+                range header sent by the client
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">3xx:</h4>
+              <p class="subtitle is-6">Redirection</p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">300 Multiple Choices</h4>
+              <p class="subtitle is-6">
+                A link list. The user can select a link and go to that location.
+                Maximum five addresses
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">301 Moved Permanently</h4>
+              <p class="subtitle is-6">
+                The requested page has moved to a new URL
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">302 Found</h4>
+              <p class="subtitle is-6">
+                The requested page has moved temporarily to a new URL
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">303 See Other</h4>
+              <p class="subtitle is-6">
+                The requested page can be found under a different URL
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">304 Not Modified</h4>
+              <p class="subtitle is-6">
+                Indicates the requested page has not been modified since last
+                requested
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">306 Switch Proxy</h4>
+              <p class="subtitle is-6">No longer used</p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">307 Temporary Redirect</h4>
+              <p class="subtitle is-6">
+                The requested page has moved temporarily to a new URL
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">308 Resume Incomplete</h4>
+              <p class="subtitle is-6">
+                Used in the resumable requests proposal to resume aborted PUT or
+                POST requests
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">4xx</h4>
+              <p class="subtitle is-6">Client Error</p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">400 Bad Request</h4>
+              <p class="subtitle is-6">
+                The request cannot be fulfilled due to bad syntax
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">401 Unauthorized</h4>
+              <p class="subtitle is-6">
+                The request was a legal request, but the server is refusing to
+                respond to it. For use when authentication is possible but has
+                failed or not yet been provided
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">402 Payment Required</h4>
+              <p class="subtitle is-6">Reserved for future use</p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">403 Forbidden</h4>
+              <p class="subtitle is-6">
+                The request was a legal request, but the server is refusing to
+                respond to it
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">404 Not Found</h4>
+              <p class="subtitle is-6">
+                The requested page could not be found but may be available again
+                in the future
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">405 Method Not Allowed</h4>
+              <p class="subtitle is-6">
+                A request was made of a page using a request method not
+                supported by that page
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">406 Not Acceptable</h4>
+              <p class="subtitle is-6">
+                The server can only generate a response that is not accepted by
+                the client
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">
+                407 Proxy Authentication Required
+              </h4>
+              <p class="subtitle is-6">
+                The client must first authenticate itself with the proxy
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">408 Request Timeout</h4>
+              <p class="subtitle is-6">
+                The server timed out waiting for the request
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">409 Conflict</h4>
+              <p class="subtitle is-6">
+                The request could not be completed because of a conflict in the
+                request
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">410 Gone</h4>
+              <p class="subtitle is-6">
+                The requested page is no longer available
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">411 Length Required</h4>
+              <p class="subtitle is-6">
+                The "Content-Length" is not defined. The server will not accept
+                the request without it
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">412 Precondition Failed</h4>
+              <p class="subtitle is-6">
+                The precondition given in the request evaluated to false by the
+                server
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">413 Request Entity Too Large</h4>
+              <p class="subtitle is-6">
+                The server will not accept the request, because the request
+                entity is too large
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">414 Request-URI Too Long</h4>
+              <p class="subtitle is-6">
+                The server will not accept the request, because the URL is too
+                long. Occurs when you convert a POST request to a GET request
+                with a long query information
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">415 Unsupported Media Type</h4>
+              <p class="subtitle is-6">
+                The server will not accept the request, because the media type
+                is not supported
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">
+                416 Requested Range Not Satisfiable
+              </h4>
+              <p class="subtitle is-6">
+                The client has asked for a portion of the file, but the server
+                cannot supply that portion
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">417 Expectation Failed</h4>
+              <p class="subtitle is-6">
+                The server cannot meet the requirements of the Expect
+                request-header field
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">5xx</h4>
+              <p class="subtitle is-6">Server Error</p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">500 Internal Server Error</h4>
+              <p class="subtitle is-6">
+                A generic error message, given when no more specific message is
+                suitable
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">501 Not Implemented</h4>
+              <p class="subtitle is-6">
+                The server either does not recognize the request method, or it
+                lacks the ability to fulfill the request
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">502 Bad Gateway</h4>
+              <p class="subtitle is-6">
+                The server was acting as a gateway or proxy and received an
+                invalid response from the upstream server
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">503 Service Unavailable</h4>
+              <p class="subtitle is-6">
+                The server is currently unavailable (overloaded or down)
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">504 Gateway Timeout</h4>
+              <p class="subtitle is-6">
+                The server was acting as a gateway or proxy and did not receive
+                a timely response from the upstream server
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">
+                505 HTTP Version Not Supported
+              </h4>
+              <p class="subtitle is-6">
+                The server does not support the HTTP protocol version used in
+                the request
+              </p>
+            </div>
+            <div class="column is-6 is-3-desktop">
+              <h4 class="title is-spaced is-4">
+                511 Network Authentication Required
+              </h4>
+              <p class="subtitle is-6">
+                The client needs to authenticate to gain network access
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
