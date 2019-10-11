@@ -1,34 +1,33 @@
 <div class="wrapper">
-<ul class="nav justify-content-end" id="custom-nav">
-  <li class="nav-item">
-    <a class="nav-link active button-link" id="home" href="/">Home</a>
-  </li>
-   <li class="nav-item">
-    <a class="nav-link active button-link" id="html" href="/html/tag">Html</a>
-  </li>
-  
-   <li class="nav-item">
-    <a class="nav-link active button-link" id="css" href="/css/properties">css</a>
-  </li>
-  
-   <li class="nav-item">
-    <a class="nav-link active button-link" id="javascript" href="/js/methods">Js</a>
-  </li>
-  
-   <li class="nav-item">
-    <a class="nav-link active button-link" id="countryCodes" href="/html/country/codes">Codes</a>
-  </li>
-  {{#if isAuthenticated}}
+  <ul class="nav justify-content-end" id="custom-nav">
     <li class="nav-item">
-    <a class="nav-link button-link" id="profile" href="/profile">profile</a>
-  </li>
-  <li class="nav-item" id="logontainer">
-    <a class="nav-link button-link" id="login" href="/logout"><i class="fas fa-power-off"></i></a>
-  </li>
-{{else}}
- <li class="nav-item" id="logontainer">
-    <a class="nav-link button-link" id="login" href="/login"><i class="fas fa-sign-in-alt"></i></a>
-  </li>
-   {{/if}}
+      <a class="nav-link active button-link" id="home" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active button-link" id="html" href="/html/tag">HTML</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link active button-link" id="css" href="/css/properties">CSS</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link active button-link" id="javascript" href="/js/methods">JS</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link active button-link" id="countryCodes" href="/html/country/codes">Codes</a>
+    </li>
+    {{#if isAuthenticated}}
+    <li class="nav-item">
+      <a class="nav-link button-link" id="profile" href="/profile">Profile</a>
+    </li>
+    <li class="nav-item" id="logontainer">
+      <a class="nav-link button-link" id="login" href="/logout"><i class="fas fa-power-off"></i></a>
+    </li>
+    {{else}}
+    <li class="nav-item" id="logontainer">
+      <a class="nav-link button-link" id="login" href="/login"><i class="fas fa-sign-in-alt"></i></a>
+    </li>
+    {{/if}}
   </ul>
-  
