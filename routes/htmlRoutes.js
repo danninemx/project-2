@@ -4,27 +4,28 @@ var moment = require('moment')
 
 
 
-module.exports = function(app) {
+module.exports = function (app) {
   //DINAMIC HEADER 
-// THIS app.use FUNCTION IS USE TO DINAMIC CHECK IF SESSION EXIST GLOBALY
-  app.use(function(req,res,next){
+  // THIS app.use FUNCTION IS USE TO DINAMIC CHECK IF SESSION EXIST GLOBALY
+  app.use(function (req, res, next) {
     res.locals.isAuthenticated = req.isAuthenticated()
     console.log(res.locals.isAuthenticated)
     next()
   });
   // Load index page
-  app.get("/", function(req, res) {
-    
-    res.render("index");
-    
-   });
+  app.get("/", function (req, res) {
 
- 
-//LOGIN ROUTE
-  app.get("/login", authenticationMiddlewareHome(), function(req, res) {
-    
+    res.render("index");
+
+  });
+
+
+  //LOGIN ROUTE
+  app.get("/login", authenticationMiddlewareHome(), function (req, res) {
+
     res.render("login");
   });
+  
   //PROFILE ROUTE
 app.get("/profile", authenticationMiddleware(), function(req, res) {
   
@@ -43,11 +44,13 @@ app.get("/profile", authenticationMiddleware(), function(req, res) {
       createdAt: moment(result[0].createdAt, "YYYYMMDD").fromNow()
     });
    })
-    
   });
- 
- 
 
+
+  // JS GUIDE ROUTE
+  app.get('/js/guide', authenticationMiddleware(), (req, res) => {
+    res.render('jsguide')
+  })
 
   //HTML TAGS ROUTE
   app.get('/html/tag',(req,res)=>{
@@ -62,7 +65,7 @@ app.get("/profile", authenticationMiddleware(), function(req, res) {
     res.render('settings')
   })
 
-  //JS METHODSN ROUTE
+  //JS METHODS ROUTE
   app.get('/js/methods',(req,res)=>{
     res.render('jsmethods')
   })
@@ -72,34 +75,34 @@ app.get("/profile", authenticationMiddleware(), function(req, res) {
     res.render('serve')
   })
   // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.render("404");
   });
 };
 
 //THIS authenticationMiddleware FUNCTION IS USE TO CHECK IF USER IS LOGIN SO IT CAN RENDER THE PROFILE PAGE IF IS NOT AUTHENTICATED IT WILL RENDER THE LOGIN PAGE
-function authenticationMiddleware () {  
-	return (req, res, next) => {
-	 if (req.isAuthenticated()) {
-    return next();
-   }else{
-    res.redirect('/login')
-   }
-	    
-	}
+function authenticationMiddleware() {
+  return (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return next();
+    } else {
+      res.redirect('/login')
+    }
+
+  }
 }
 
 //THIS authenticationMiddlewareHome FUNCTION IS USE TO CHECK IF USER IS ACTIVE. IF USER IS ACTIVE IT WILL PREVENT THE USER GOING BACK TO THE LOGIN PAGE, UNLESS USER LOGOUT
-function authenticationMiddlewareHome() {  
-	return (req, res, next) => {
-	 if (!req.isAuthenticated()) {
-    return next();
-   }else{
-   
-    res.redirect('/')
-   }
-	    
-	}
+function authenticationMiddlewareHome() {
+  return (req, res, next) => {
+    if (!req.isAuthenticated()) {
+      return next();
+    } else {
+
+      res.redirect('/')
+    }
+
+  }
 }
 
 
