@@ -69,15 +69,8 @@ if (process.env.NODE_ENV === "test") {
 
 // Scheduled Heroku server waker
 setInterval(function (err) {
-  http.get("http://immense-ridge-78589.herokuapp.com/"); 
+  http.get("http://immense-ridge-78589.herokuapp.com/");
 }, 300000);
-
-
-
-//----------------------------------------------------------------------//
-// TO-DO: ADD A ONE-TIME TRANSMISSION TASK TO BE RUN UPON USER SIGN-UP. //
-//----------------------------------------------------------------------//
-
 
 
 // Starting the server, syncing our models ------------------------------------/
