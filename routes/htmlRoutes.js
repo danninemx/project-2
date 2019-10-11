@@ -47,9 +47,7 @@ app.get("/profile", authenticationMiddleware(), function(req, res) {
   });
  
  
-  app.get('/settings',  authenticationMiddleware(), (req,res)=>{
-    res.render('settings')
-  })
+
 
   //HTML TAGS ROUTE
   app.get('/html/tag',  authenticationMiddleware(), (req,res)=>{
