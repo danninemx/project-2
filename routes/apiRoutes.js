@@ -14,54 +14,54 @@ const Op = Sequelize.Op; // Sequelize querying operator
 
 
 module.exports = function (app) {
-//API for all data in table cssData
-app.get('/api/css/properties',(req,res)=>{
-  db.cssData.findAll({}).then((result)=>{
-    res.json(result)
+  //API for all data in table cssData
+  app.get('/api/css/properties', (req, res) => {
+    db.cssData.findAll({}).then((result) => {
+      res.json(result)
+    })
   })
-}) 
 
-//API for single result in table cssData
-app.get('/api/css/properties/:name',(req,res)=>{
-  db.cssData.findAll({where: {properties: req.params.name}}).then((result)=>{
-    res.json(result)
+  //API for single result in table cssData
+  app.get('/api/css/properties/:name', (req, res) => {
+    db.cssData.findAll({ where: { properties: req.params.name } }).then((result) => {
+      res.json(result)
+    })
   })
-}) 
 
 
-//API for all data in table jsMethodsData
-app.get('/api/js/methods',(req,res)=>{
-  db.jsMethodsData.findAll({}).then((result)=>{
-    res.json(result)
+  //API for all data in table jsMethodsData
+  app.get('/api/js/methods', (req, res) => {
+    db.jsMethodsData.findAll({}).then((result) => {
+      res.json(result)
+    })
   })
-}) 
 
-//API for single result in table jsMethodsData
-app.get('/api/js/methods/:name',(req,res)=>{
-  db.jsMethodsData.findAll({where: { method: req.params.name}}).then((result)=>{
-    res.json(result)
+  //API for single result in table jsMethodsData
+  app.get('/api/js/methods/:name', (req, res) => {
+    db.jsMethodsData.findAll({ where: { method: req.params.name } }).then((result) => {
+      res.json(result)
+    })
   })
-})
 
 
-//API for all data in table HtmlData
-app.get('/api/html/tag',(req,res)=>{
-  db.HtmlData.findAll({}).then((result)=>{
-    res.json(result)
+  //API for all data in table HtmlData
+  app.get('/api/html/tag', (req, res) => {
+    db.HtmlData.findAll({}).then((result) => {
+      res.json(result)
+    })
   })
-}) 
 
-//API for single result in table HtmlData
-app.get('/api/html/tag/:name',(req,res)=>{
-  db.HtmlData.findAll({where: { tag: req.params.name}}).then((result)=>{
-    res.json(result)
+  //API for single result in table HtmlData
+  app.get('/api/html/tag/:name', (req, res) => {
+    db.HtmlData.findAll({ where: { tag: req.params.name } }).then((result) => {
+      res.json(result)
+    })
   })
-})
 
 
   // Call this to send lesson email to a single user upon signup
   function singleSend(fn, em) {
-  
+
     // Create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -104,10 +104,10 @@ app.get('/api/html/tag/:name',(req,res)=>{
   })
   // SIGN UP AND LOGIN 
   app.post("/api/signup", (req, res) => {
-    //SIGN UP OR LOGIN  LOGIC
-    //CHECK IF VALUE IS 1 OR 0
-    //IF VALUE IS  0 WE WILL REGISTER THE USER
-    //IF VALUE IS  1 WE WILL LOG THE USER IN
+    //SIGN UP OR LOGIN  LOGIC
+    //CHECK IF VALUE IS 1 OR 0
+    //IF VALUE IS  0 WE WILL REGISTER THE USER
+    //IF VALUE IS  1 WE WILL LOG THE USER IN
     if (req.body.loginActive === "0") {
 
       db.users.count({
@@ -115,7 +115,7 @@ app.get('/api/html/tag/:name',(req,res)=>{
       }).then(function (checkEmailData) {
         if (checkEmailData > 0) {
 
-          console.log("You have an account with Us Please login")
+          console.log("You have an account with Us Please login")
 
         } else {
           const firstName = req.body.firstName
@@ -124,9 +124,9 @@ app.get('/api/html/tag/:name',(req,res)=>{
           const password = req.body.password
 
 
-          //SIGN UP USER
+          //SIGN UP USER
           bcrypt.hash(password, saltRounds, function (err, hash) {
-            // Store hash in your password DB.
+            // Store hash in your password DB.
             db.users.create({
               userFirstName: firstName,
               userLastName: lastName,
@@ -138,7 +138,7 @@ app.get('/api/html/tag/:name',(req,res)=>{
               singleSend(firstName, email);
 
               var user_id = result.id;
-              console.log("Success Sign up")
+              console.log("Success Sign up")
               console.log(user_id)
               req.login(user_id, function (err) {
                 res.redirect('/');
@@ -159,7 +159,7 @@ app.get('/api/html/tag/:name',(req,res)=>{
       }).then(function (checkEmailData) {
         if (checkEmailData === 0) {
 
-          console.log("Please Sign Up")
+          console.log("Please Sign Up")
 
         } else {
 
@@ -170,19 +170,19 @@ app.get('/api/html/tag/:name',(req,res)=>{
             }
           ).then(function (result) {
             bcrypt.compare(req.body.password, result[0].password, function (err, results) {
-              // res == true
+              // res == true
               if (err) {
                 console.log(err)
 
               };
               if (!results) {
-                console.log("Please Check your Email and Password")
+                console.log("Please Check your Email and Password")
 
               } else {
 
                 var user_id = result[0].id;
                 console.log(user_id)
-                console.log("Success Login")
+                console.log("Success Login")
                 req.login(user_id, function (err) {
                   res.redirect('/');
                 })
@@ -244,4 +244,3 @@ passport.serializeUser((user_id, done) => {
 passport.deserializeUser((user_id, done) => {
   done(null, user_id)
 });
-
