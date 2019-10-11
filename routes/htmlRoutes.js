@@ -38,7 +38,7 @@ app.get("/profile", authenticationMiddleware(), function(req, res) {
    }).then(function(result){
     console.log(result[0])
      res.render("profile", {
-      msg: "Alex",
+      msg: result[0].userFirstName,
       user: result[0],
       createdAt: moment(result[0].createdAt, "YYYYMMDD").fromNow()
     });
@@ -50,25 +50,25 @@ app.get("/profile", authenticationMiddleware(), function(req, res) {
 
 
   //HTML TAGS ROUTE
-  app.get('/html/tag',  authenticationMiddleware(), (req,res)=>{
+  app.get('/html/tag',(req,res)=>{
     res.render('htmltag')
   })
    //HTML COUNTRY CODES  ROUTE
-   app.get('/html/country/codes',  authenticationMiddleware(), (req,res)=>{
+   app.get('/html/country/codes',(req,res)=>{
     res.render('htmlcc')
   })
   //CSS PROPERTIES ROUTE
-  app.get('/css/properties',  authenticationMiddleware(), (req,res)=>{
+  app.get('/css/properties',(req,res)=>{
     res.render('settings')
   })
 
   //JS METHODSN ROUTE
-  app.get('/js/methods',  authenticationMiddleware(), (req,res)=>{
+  app.get('/js/methods',(req,res)=>{
     res.render('jsmethods')
   })
 
   //COUNTRY CODES ROUTE
-  app.get('/server/codes',  authenticationMiddleware(), (req,res)=>{
+  app.get('/server/codes',(req,res)=>{
     res.render('serve')
   })
   // Render 404 page for any unmatched routes
