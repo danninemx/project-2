@@ -18,47 +18,67 @@
       <section class="section" id="section1">
           <div class="container has-text-centered">
             <div class="columns is-multiline">
-              <div class="column is-6 is-3-desktop">
+            {{#each data}}
+            <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{method}}</h5>
+    <p class="card-text">{{descriptions}}</p>
+    <a href="/js/methods/{{id}}" class="card-link">Check me out</a>
+  </div>
+</div>
+ {{/each}}
+             
+
+
+
+
+
+
+
+
+
+
+              {{!-- <div class="column is-6 is-3-desktop">
                 <h4 class="title is-spaced is-4">Apply</h4>
                 <p class="subtitle is-6">The apply() method calls a function with a given this value, and arguments provided as an array (or an array-like object).</p>
               </div>
               <div class="column is-6 is-3-desktop">
                 <h4 class="title is-spaced is-4">Finally</h4>
-                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the specified callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
+                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the speceachied callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
               </p>
               </div>
               <div class="column is-6 is-3-desktop">
                 <h4 class="title is-spaced is-4">Finally</h4>
-                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the specified callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
+                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the speceachied callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
               </p>
               </div>
               <div class="column is-6 is-3-desktop">
                 <h4 class="title is-spaced is-4">Finally</h4>
-                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the specified callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
+                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the speceachied callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
               </p>
               </div>
               <div class="column is-6 is-3-desktop">
                 <h4 class="title is-spaced is-4">Finally</h4>
-                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the specified callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
+                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the speceachied callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
               </p>
               </div>
               <div class="column is-6 is-3-desktop">
                 <h4 class="title is-spaced is-4">Finally</h4>
-                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the specified callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
+                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the speceachied callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
               </p>
               </div>
               <div class="column is-6 is-3-desktop">
                 <h4 class="title is-spaced is-4">Finally</h4>
-                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the specified callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
+                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the speceachied callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
               </p>
               </div>
               <div class="column is-6 is-3-desktop">
                 <h4 class="title is-spaced is-4">Finally</h4>
-                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the specified callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
+                <p class="subtitle is-6">The finally() method returns a Promise. When the promise is settled, i.e either fulfilled or rejected, the speceachied callback function is executed. This provides a way for code to be run whether the promise was fulfilled successfully or rejected once the Promise has been dealt with.
               </p>
               </div>
 
-            </div>
+            </div> --}}
           </div>
         </section>
   </div>

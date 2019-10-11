@@ -1,4 +1,11 @@
 
+.login-header{
+    height: 100vh;
+    padding: 30px;
+    background-image: linear-gradient(to right bottom,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1));
+}
 .toggle-name{
     display: none;
 }

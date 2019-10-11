@@ -1,4 +1,12 @@
+
+@import './abstracts/variables';
+@import './base/base';
 @import './pages/login';
 @import './pages/index';
 @import './pages/profile.scss';
+@import './pages/each.scss';
 @import './layout/partials/navbar.scss';
+@import './layout/footer';
+.card{
+    margin: 10px;
+}

@@ -1,0 +1,36 @@
+
+{{#each singleData}}
+<div class="jumbotron-fluid each-header">
+  <div class="container-fluid page-title-container">
+      <h1 class="page-title">{{method}}</h1>
+    </div>
+   <div class="container user-info-container">
+    <div class="row">
+     <div class="container section-title">
+          <h1>{{descriptions}}</h1>
+        </div>
+     
+   </div>
+  </div>
+   
+</div>
+
+{{/each}}
+  <div class="container-fluid">
+         <h1 class="section-title">Methods</h1>
+     </div>
+    
+  <!-- Container for table -->
+  <div class="container is-fluid">
+      <section class="section" id="section1">
+          <div class="container has-text-centered">
+            <div class="columns is-multiline">
+            {{#each allData}}
+            <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{method}}</h5>
+    <p class="card-text">{{descriptions}}</p>
+    <a href="/js/methods/{{id}}" class="card-link">Check me out</a>
+  </div>
+</div>
+ {{/each}}
