@@ -14,6 +14,14 @@ const Op = Sequelize.Op; // Sequelize querying operator
 
 
 module.exports = function (app) {
+
+  //API for all data in table guide
+  app.get('/api/js/guide', (req, res) => {
+    db.guide.findAll({}).then((result) => {
+      res.json(result)
+    })
+  })
+
   //API for all data in table cssData
   app.get('/api/css/properties', (req, res) => {
     db.cssData.findAll({}).then((result) => {
