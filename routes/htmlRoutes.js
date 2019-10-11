@@ -62,12 +62,29 @@ app.get("/profile", authenticationMiddleware(), function(req, res) {
   })
   //CSS PROPERTIES ROUTE
   app.get('/css/properties',(req,res)=>{
-    res.render('settings')
+    res.render('css')
   })
 
-  //JS METHODS ROUTE
+
   app.get('/js/methods',(req,res)=>{
-    res.render('jsmethods')
+    db.jsMethodsData.findAll({}).then(function(result){
+console.log(result)
+  res.render('jsmethods',{data: result})
+
+      
+    })
+    
+  })
+
+// SINGLE JS METHOD ROUTE
+  app.get('/js/methods/:id', (req, res) => {
+    db.jsMethodsData.findAll({ where: { id: req.params.id } }).then((resultSingleMethod) => {
+      db.jsMethodsData.findAll({}).then((resultAllData) => {
+    var data = {singleData: resultSingleMethod, allData: resultAllData}
+        res.render('each',data)
+      })
+      
+    })
   })
 
   //COUNTRY CODES ROUTE

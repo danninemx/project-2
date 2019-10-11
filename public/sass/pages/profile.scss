@@ -1,23 +1,66 @@
 .profile-header{
-    padding: 20px;
+    height: 100vh;
+    // background-image: linear-gradient(to right bottom,
+    // rgb(0, 166, 255),
+    // rgb(1, 181, 247));
+    background-color: $Lynx-primary;
+}
+.page-title-container{
+    background-image: linear-gradient(to right bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5));
+    padding: 30px;
 }
 
+.page-title{
+    text-align: left;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.welcome-container{
+    text-align: center;
+    padding: 50px;
+}
+
+
 .welcome-message{
+    padding: 20px;
+     letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: whitesmoke;
+  
+   
+}
+.profile-picture{
+    border-radius: 100px;
+    border: 2px solid white;
+
+}
+.section-title{
     text-align: center;
     letter-spacing: 3px;
     text-transform: uppercase;
+    padding: 40px;
     font-weight: bold;
-    padding: 20px;
-    background-color: white;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-   
+    font-size: 20px;
+
+}
+.user-info-container{
+    padding: 30px;
+    text-align: center;
 }
 .user-info{
-    background-color: whitesmoke;
+   
 
 }
-
-.user-dashboard{
-background-color: gainsboro;
+.list-group{
+    padding: 10px;
+    background-color: transparent;
+}
+.list-group-item{
+    padding: 10px;
+    background-color: transparent;
 }
