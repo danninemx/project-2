@@ -7,7 +7,7 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op; // Sequelize querying operator
 
 // Deployed site URL for link in email
-let deployURL = 'https://immense-ridge-78589.herokuapp.com';
+let deployURL = 'https://immense-ridge-78589.herokuapp.com/js/methods';
 
 //------------//
 // Nodemailer //
@@ -33,7 +33,7 @@ function maxSend(fn, em) {
 </br>
 <p>We will inform you tomorrow if we have a new lesson for you.</p>
 </br>
-<p>In the mean time, feel free to explore <a href='${deployURL}/api/js/methods'>these additional resources</a>!</p>
+<p>In the mean time, feel free to explore <a href='${deployURL}'>these additional resources</a>!</p>
 </br>
 <p>Sincerely,</p>
 <h3>Your friends at <strong>Group Lynx</strong></h3>
@@ -41,9 +41,9 @@ function maxSend(fn, em) {
 
   // Send mail with defined transport object
   transporter.sendMail({
-    from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
+    from: '"Group Lynx 🐱" <projectgroupLynx@gmail.com>', // sender address
     to: em,
-    cc: 'projectgrouplynx@gmail.com',
+    bcc: 'projectgrouplynx@gmail.com',
     subject: "Kudos from Group Lynx!",
     html: contents // message body
   });
@@ -64,10 +64,10 @@ function massSend() {
     }
   });
 
-  // Determine the highest lessonId possible
-  // SELECT MAX(lessonId) FROM guides;
-  db.guide.max('lessonId').then(function (maxId) {
-    console.log(chalk.bgYellow('Highest lessonId in guides is :' + maxId));
+  // Determine the highest id possible
+  // SELECT MAX(id) FROM jsMethodsData;
+  db.jsMethodsData.max('id').then(function (maxId) {
+    console.log(chalk.bgBlue('Highest id in jsMethodsData is :' + maxId));
 
     // Query the users table for all users
     db.users.findAll({}).then(function (result) {
@@ -80,53 +80,55 @@ function massSend() {
         let recipientName = result[i].userFirstName;
         let recipientEmail = result[i].email;
         let progress = result[i].lastLessonId;
-        let contents = "";
+        let contents = "<h3>Javascript methods of the day</h3></br>";
 
         // If user already has highest lesson # available...
         if (progress === maxId) {
           maxSend(recipientName, recipientEmail);
 
         } else {
-          // Query the guides table for HTML components needed for the user's lesson email.
-          db.guide.findAll({
+
+          db.jsMethodsData.findAll({
             where: {
-              lessonId: (progress + 1),
-              paragraph: {
-                [Op.lt]: 4 // < 4 rows of data.
+              id: {
+                [Op.between]: [(progress + 1), (progress + 3)] // this method and 2 more
               }
             }
-          }).then(function (res) {
+          }).then((res) => {
 
-            // For each HTML component...
+            // For each method...
             for (let j = 0; j < res.length; j++) {
 
-              // Concatenate new component and a line break
-              contents += res[j].content + "</br>";
+              // Concatenate new method data and a line break
+              contents += `<h2 style="font-size:2em">${res[j].method}</h2>
+<p style="font-size:1.5rem">${res[j].descriptions}</p>
+</br></br>
+`;
+              console.log(chalk.green(contents));
 
-              console.log(chalk.bgWhite(contents));
-
-              // If the final component was concatenated...
+              // If the final method was concatenated...
               if (j === (res.length - 1)) {
 
-                // Append link to the guide page
-                contents += '<a href="' + deployURL + '">Continue Reading</a>';
+                // Append link to the website
+                contents += '<a href="' + deployURL + '">View More</a>';
 
                 // Send mail with defined transport object
                 transporter.sendMail({
-                  from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
+                  from: '"Group Lynx 🐱" <projectgroupLynx@gmail.com>', // sender address
                   to: recipientEmail,
-                  cc: 'projectgrouplynx@gmail.com',
+                  bcc: 'projectgrouplynx@gmail.com',
                   subject: "Today's lesson for " + recipientName,
                   html: contents // lesson contents
                 }); // End email transmission
               } // End concatenation completion check
 
             } // End loop through email components
-          }); // End of the guides table query
+          }); // End of the jsMethodsData table query
 
           // Increment 1 to this user's table's lastLessonId value.
           // UPDATE users SET lastLessonId = (lastLessonId + 1) WHERE lastLessonId < maxId
           db.users.increment('lastLessonId', {
+            by: 3,
             where: {
               id: recipientId
             }
@@ -137,10 +139,12 @@ function massSend() {
       } // End of the loop through the users
     }) // End of the users table query
 
-  }); // End of the MAX(guides.lessonId) query
+  }); // End of the jsMethodsData query
 
 } // End of massSend()
 
+// test send
+// massSend();
 
 //----------------//
 // Task Scheduler //
@@ -148,7 +152,7 @@ function massSend() {
 
 // Schedule the daily mass transmission task.
 const daily = cron.schedule('0 7 * * *', () => {
-  console.log('Running daily job at 07:00 AM');
+  console.log('Running daily job at 07:00 AM CT');
   massSend();
 }, {
     scheduled: true,
