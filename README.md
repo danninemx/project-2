@@ -29,7 +29,7 @@ This is a full stack application that provides daily lessons via email for subsc
 
 ---
 
-## Technologies <a name="technologies"></a>
+## Technologies
 
 - [Node.js](https://nodejs.org/en/)
 - [NPM: Chalk](https://www.npmjs.com/package/chalk)
