@@ -84,7 +84,7 @@ module.exports = function (app) {
 </br>
 <p>You have been enrolled into our daily lessons program.</p>
 </br>
-<p>Starting tomorrow, you will receive our lesson by email every day at 7:00 AM CT.</p>
+<p>Starting tomorrow, you will receive our lesson by email.</p>
 </br>
 <p>Prepare to become smarter every day!</p>
 </br>
@@ -94,9 +94,9 @@ module.exports = function (app) {
 
     // Send mail with defined transport object
     transporter.sendMail({
-      from: '"Group Lynx 👻" <projectgroupLynx@gmail.com>', // sender address
+      from: '"Group Lynx 🐱" <projectgroupLynx@gmail.com>', // sender address
       to: em,
-      cc: 'projectgrouplynx@gmail.com',
+      bcc: 'projectgrouplynx@gmail.com',
       subject: "Greetings from Group Lynx",
       html: contents // message body
     });
