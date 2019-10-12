@@ -1,6 +1,7 @@
 # [Email Lesson Manager](https://immense-ridge-78589.herokuapp.com/)
 
 This is a full stack web application that provides daily lessons via email to subscribed users.
+s
 
 ---
 
@@ -13,9 +14,9 @@ This is a full stack web application that provides daily lessons via email to su
 
 ---
 
-## Overview
+## Overview <a name="overview"></a>
 
-![Lynx-dataflow-diagram](./public/styles/lynx-DFD.svg)
+![Lynx-dataflow-diagram](./public/lynx-DFD.svg)
 
 1. User subscribes to the web app and receives an introductory email.
 
@@ -29,7 +30,7 @@ This is a full stack web application that provides daily lessons via email to su
 
 ---
 
-## Technologies
+## Technologies <a name="technologies"></a>
 
 - [Node.js](https://nodejs.org/en/)
 - [NPM: Chalk](https://www.npmjs.com/package/chalk)
@@ -46,7 +47,7 @@ This is a full stack web application that provides daily lessons via email to su
 
 ---
 
-## Future Development
+## Future Development <a name="future"></a>
 
 - Selection-driven progression
 - Additional subjects and structures
@@ -56,7 +57,7 @@ This is a full stack web application that provides daily lessons via email to su
 
 ---
 
-## Developers (alphabetical)
+## Developers (alphabetical) <a name="team"></a>
 
 - [Bladimir Orellana](https://github.com/BladimirOrellana)
 - [Danny Kim](https://github.com/danninemx)
