@@ -1,7 +1,6 @@
 # [Email Lesson Manager](https://immense-ridge-78589.herokuapp.com/)
 
 This is a full stack web application that provides daily lessons via email to subscribed users.
-s
 
 ---
 
