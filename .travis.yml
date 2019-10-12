@@ -9,10 +9,9 @@
 # # before_install:
 # #   - mysql -e 'CREATE DATABASE testdb;'
 
-# language: node_js
-# node_js:
-#   - "11"
-# ​
-# script:
-#   - npm run test
-#   - npm run lint
+language: node_js
+node_js:
+  - "11"
+​
+script:
+  - npm run lint
