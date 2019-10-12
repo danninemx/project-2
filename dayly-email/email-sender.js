@@ -1,3 +1,6 @@
+//--------------//
+// Dependencies //
+//--------------//
 var chalk = require('chalk'); // For ease of local testing
 var db = require("../models");
 const cron = require('node-cron');
@@ -8,6 +11,8 @@ const Op = Sequelize.Op; // Sequelize querying operator
 
 // Deployed site URL for link in email
 let deployURL = 'https://immense-ridge-78589.herokuapp.com/js/methods';
+
+
 
 //------------//
 // Nodemailer //
@@ -25,7 +30,7 @@ function maxSend(fn, em) {
     }
   });
 
-  // *** TO-DO: Change the temporarily placed API route to HTML route for study page. *** //
+  // Message body
   let contents = `
 <h2>Great job, ${fn}!</h2>
 </br>
@@ -82,16 +87,15 @@ function massSend() {
         let progress = result[i].lastLessonId;
         let contents = "<h3>Javascript methods of the day</h3></br>";
 
-        // If user already has highest lesson # available...
+        // If user finished all available lessons, notify by email.
         if (progress === maxId) {
           maxSend(recipientName, recipientEmail);
 
-        } else {
-
+        } else { // Otherwise query 3 rows of JS methods data applicable to the user
           db.jsMethodsData.findAll({
             where: {
               id: {
-                [Op.between]: [(progress + 1), (progress + 3)] // this method and 2 more
+                [Op.between]: [(progress + 1), (progress + 3)]
               }
             }
           }).then((res) => {
@@ -104,7 +108,7 @@ function massSend() {
 <p style="font-size:1.5rem">${res[j].descriptions}</p>
 </br></br>
 `;
-              console.log(chalk.green(contents));
+              // console.log(chalk.green(contents));
 
               // If the final method was concatenated...
               if (j === (res.length - 1)) {
@@ -126,7 +130,7 @@ function massSend() {
           }); // End of the jsMethodsData table query
 
           // Increment 1 to this user's table's lastLessonId value.
-          // UPDATE users SET lastLessonId = (lastLessonId + 1) WHERE lastLessonId < maxId
+          // UPDATE users SET lastLessonId = (lastLessonId + 3) WHERE lastLessonId < maxId
           db.users.increment('lastLessonId', {
             by: 3,
             where: {
@@ -143,16 +147,14 @@ function massSend() {
 
 } // End of massSend()
 
-// test send
-// massSend();
 
 //----------------//
 // Task Scheduler //
 //----------------//
 
 // Schedule the daily mass transmission task.
-const daily = cron.schedule('0 7 * * *', () => {
-  console.log('Running daily job at 07:00 AM CT');
+const daily = cron.schedule('0 6 * * *', () => {
+  console.log('Running daily mass email job');
   massSend();
 }, {
     scheduled: true,
