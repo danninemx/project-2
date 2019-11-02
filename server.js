@@ -67,10 +67,10 @@ if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
 
-// Scheduled Heroku server waker
-setInterval(function (err) {
-  http.get("http://immense-ridge-78589.herokuapp.com/");
-}, 300000);
+// // Scheduled Heroku server waker: Enable this if this service needs to be online all the time
+// setInterval(function (err) {
+//   http.get("http://immense-ridge-78589.herokuapp.com/");
+// }, 300000);
 
 
 // Starting the server, syncing our models ------------------------------------/
