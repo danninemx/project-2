@@ -62,3 +62,4 @@ This is a full stack web application that provides daily lessons via email to su
 - [Danny Kim](https://github.com/danninemx)
 - [John Paschal](https://github.com/patrickjpaschal)
 - [Martin Palacios](https://github.com/martinapalacios)
+![screenshot](lessons.jpg)    
